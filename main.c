@@ -14,32 +14,32 @@ struct Portico
 typedef struct Portico portico;
 
 
-portico p[]={
-    {1,3,2,1},
-    {2,2,1,3},
-    {3,1,1,1},
-    {4,3,2,1}
 
-};
 
-void addPortico(){
+void addPortico(portico p[]){
+   system("clear");
    portico newPortico;
    
+
     printf("insira o numero do portico: ");
     scanf("%d", &newPortico.id);
     int idExist;
-
-    for (int  i = 0; i < sizeof(newPortico); i++)
+    
+    for (int  i = 0; i < 10; i++)
     {
-       if (newPortico.id[i]  == p.id[i])
+       if (newPortico.id == p[i].id)
        {
-        /* code */
+         printf("ja existe esse numero");
+         return;
        }
-       
+       else{
+        
+            //scanf("%d", &p.id);
+       }
     };
     
     
-    if (idExist = 0)
+    /*if (idExist = 0)
     {
     printf("insira o preço da passagem do motociclo: ");
     scanf("%f", &p.motorcyclePrice);
@@ -50,23 +50,27 @@ void addPortico(){
     } 
     else
     {
-        printf("portico com id ja existente")
-    };
+        printf("portico com id ja existente");
+    }
     
-    
+    */
 };
 
 
 int main(int argc, char const *argv[])
 {
     int num;
-    portico p;
-    
 
-    struct Portico porticos[3] = {
-        
-    };
+    portico p[]={
+    {1,3,2,1},
+    {2,2,1,3},
+    {3,1,1,1},
+    {4,3,2,1}
+};
 
+   
+do
+{
     printf("\n 1 - Inserir pórticos com tabela de preços");
     printf("\n 2 - Listar Pórticos ");
     printf("\n 3 - Média Tráfego por Pórtico");
@@ -85,13 +89,13 @@ int main(int argc, char const *argv[])
     printf("\n 16 - Pórtico com maior tráfego");
     printf("\n\n Escolha uma opcao: ");
     scanf("%d", &num);
+    /* code */
 
-    // estrutura switch
     switch (num)
     {
     case 1:
     {
-        addPortico();
+        addPortico(p);
         break;
     }
     case 2:
@@ -185,6 +189,25 @@ int main(int argc, char const *argv[])
         printf("\n\n Opcao escolhida: 16 ");
         break;
     }
+    default:
+    {
+
+        printf("\n\n Opcao invalida ");
+        break;
     }
-    return 0;
+    case 17:
+    {
+
+        printf("\n\n Sair do programa");
+        break;
+    }
+    }
+   
 }
+ while (num != 17);
+
+ return 0;
+
+
+}
+    
