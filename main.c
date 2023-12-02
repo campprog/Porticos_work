@@ -2,25 +2,72 @@
 #include <stdlib.h>
 #include <string.h>
 
-int num;
+
 struct Portico
-{
-    int price;
-    int vehicleType;
+{   
+    int id;
+    float motorcyclePrice;
+    float lightVehiclePrice;
+    float heavyVehiclePrice;
 };
+
 typedef struct Portico portico;
+
+
+portico p[]={
+    {1,3,2,1},
+    {2,2,1,3},
+    {3,1,1,1},
+    {4,3,2,1}
+
+};
+
+void addPortico(){
+   portico newPortico;
+   
+    printf("insira o numero do portico: ");
+    scanf("%d", &newPortico.id);
+    int idExist;
+
+    for (int  i = 0; i < sizeof(newPortico); i++)
+    {
+       if (newPortico.id[i]  == p.id[i])
+       {
+        /* code */
+       }
+       
+    };
+    
+    
+    if (idExist = 0)
+    {
+    printf("insira o preço da passagem do motociclo: ");
+    scanf("%f", &p.motorcyclePrice);
+    printf("insira o preço da passagem do veiculo ligeiro: ");
+    scanf("%f", &p.lightVehiclePrice);
+    printf("insira o preço da passagem do veiculo pesado: ");
+    scanf("%f", &p.heavyVehiclePrice); 
+    } 
+    else
+    {
+        printf("portico com id ja existente")
+    };
+    
+    
+};
+
 
 int main(int argc, char const *argv[])
 {
-portico p;
-p.price= 3;
+    int num;
+    portico p;
+    
 
-
-    struct Portico Porticos[3] = {
+    struct Portico porticos[3] = {
         
     };
 
-    printf("\n 1 - Pórticos ");
+    printf("\n 1 - Inserir pórticos com tabela de preços");
     printf("\n 2 - Listar Pórticos ");
     printf("\n 3 - Média Tráfego por Pórtico");
     printf("\n 4 - Tráfego Total por Pórticos");
@@ -44,17 +91,7 @@ p.price= 3;
     {
     case 1:
     {
-        struct Registro novoRegistro;
-        printf("Digite o número do pórtico: ");
-        scanf("%d", &novoRegistro.novoPortico);
-        printf("Digite o valor para a classe Motociclos: ");
-        scanf("%d", &novoRegistro.ValorVeiculoMotociclo);
-        printf("Digite o valor para a classe Ligeira: ");
-        scanf("%d", &novoRegistro.ValorVeiculoLigeiro);
-        printf("Digite o valor para a classe Pesada: ");
-        scanf("%d", &novoRegistro.ValorVeiculoPesado);
-        adicionarRegistro(arquivo, novoRegistro);
-        printf("Pórtico Adicionado\n");
+        addPortico();
         break;
     }
     case 2:
