@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-/*void clearConsole()
+void clearConsole()
 {
-    system("clear"); // For Linux/macOS
-    // or
-    system("cls");  // For Windows
-}*/
+    printf("\033[2J\033[H");
+}
 struct Portico
 {
     int id;
@@ -20,7 +18,7 @@ typedef struct Portico portico;
 
 void addPortico(portico p[], int *nrOfporticos)
 {
-    //system("cls");
+    clearConsole();
     portico newPortico;
 
     printf("insira o numero do portico: ");
@@ -40,37 +38,38 @@ void addPortico(portico p[], int *nrOfporticos)
     scanf("%f", &newPortico.lightVehiclePrice);
     printf("insira o preço da passagem do veiculo pesado: ");
     scanf("%f", &newPortico.heavyVehiclePrice);
-    
+
     p[*nrOfporticos] = newPortico;
     (*nrOfporticos)++;
-    
 };
 
-void listPorticos(portico p[] , int nrOfporticos)
+void listPorticos(portico p[], int nrOfporticos)
 {
-
+    clearConsole();
+    printf("%d", nrOfporticos);
     for (int i = 0; i < nrOfporticos; i++)
     {
-         printf("\n---------------------------------------------------------------------\n");
+        printf("\n---------------------------------------------------------------------\n");
         printf("id: %d \n", p[i].id);
         printf("Motociclos: %f \n", p[i].motorcyclePrice);
         printf("Veiculos ligeiros: %f \n", p[i].lightVehiclePrice);
         printf("Veiculos pesados %f \n", p[i].heavyVehiclePrice);
         printf("---------------------------------------------------------------------\n");
     }
-    
 }
 
 int main(int argc, char const *argv[])
 {
     int nrOfporticos = 4;
-    int num;
+    int option;
 
-    portico p[] = {
+    portico p[500] = {
         {1, 3, 2, 1},
         {2, 2, 1, 3},
         {3, 1, 1, 1},
-        {4, 3, 2, 1}};
+        {4, 3, 2, 1}
+
+    };
 
     do
     {
@@ -91,10 +90,9 @@ int main(int argc, char const *argv[])
         printf("\n 15 - Total de gastos por Veículo");
         printf("\n 16 - Pórtico com maior tráfego");
         printf("\n\n Escolha uma opcao: ");
-        scanf("%d", &num);
-        
+        scanf("%d", &option);
 
-        switch (num)
+        switch (option)
         {
         case 1:
         {
@@ -108,7 +106,7 @@ int main(int argc, char const *argv[])
             listPorticos(p, nrOfporticos);
             break;
         }
-\
+
         case 3:
         {
 
@@ -208,7 +206,7 @@ int main(int argc, char const *argv[])
         }
         }
 
-    } while (num != 17);
+    } while (option != 17);
 
     return 0;
 }
