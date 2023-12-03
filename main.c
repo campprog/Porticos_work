@@ -41,7 +41,7 @@ void addPortico(portico p[], int *nrOfporticos)
 
     p[*nrOfporticos] = newPortico;
     (*nrOfporticos)++;
-};
+}
 
 void listPorticos(portico p[], int nrOfporticos)
 {
@@ -59,7 +59,6 @@ void listPorticos(portico p[], int nrOfporticos)
 }
 void editPrices(portico p[], int nrOfporticos)
 {
-
     clearConsole();
     int EditPortico;
     printf("Insira o número do portico que deseja editar: ");
@@ -80,6 +79,47 @@ void editPrices(portico p[], int nrOfporticos)
         }
     }
 }
+
+void priceCheckForEachClass(portico p[], int nrOfporticos)
+{
+    int porticoid;
+    int porticoClass;
+    int porticoPosition;
+    printf("\nEscolha o Portico: ");
+    scanf("%d", &porticoid);
+
+    for (int i = 0; i < nrOfporticos; i++)
+    {
+        if (porticoid == p[i].id)
+        {
+            printf("Escolha a class: \n");
+            printf("motociclo: 1\n");
+            printf("veiculos ligeiros: 2\n");
+            printf("veiculos Pesados: 3\n");
+            scanf("%d", &porticoClass);
+            
+            if (porticoClass == 1)
+            {
+                printf("Preco do Motociclo: %f", p[i].motorcyclePrice);
+            }
+            else if (porticoClass == 2)
+            {
+                printf("Preco do veiculo ligeiro: %f", p[i].lightVehiclePrice);
+            }
+            else if (porticoClass == 3)
+            {
+                printf("Preco do veiculo Pesado: %f", p[i].heavyVehiclePrice);
+            }
+            else
+            {
+                printf("Opcao Invalida");
+            }
+            return;
+        }
+    }
+    printf("Este portico nao existe");
+}
+
 int main(int argc, char const *argv[])
 {
     int nrOfporticos = 4;
@@ -92,17 +132,17 @@ int main(int argc, char const *argv[])
         {4, 3, 2, 1}
 
     };
-
+    //porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
     do
     {
         printf("\n 1 - Inserir pórticos com tabela de preços");
         printf("\n 2 - Listar Pórticos ");
-        printf("\n 3 - Alterar Preços do Pórtico");
-        printf("\n 4 -  Inserir passagem num Pórtico ");
-        printf("\n 5 - Rendimento Diário por Pórtico ");
-        printf("\n 6 - Tráfego diário por classe de Veículo");
-        printf("\n 7 - Rendimento diário por classe de Veículo");
-        printf("\n 8 - Preço Pórtico por classe");
+        printf("\n 3 - Preço Pórtico por classe");
+        printf("\n 4 - Alterar Preços do Pórtico");
+        printf("\n 5 - Inserir passagem num Pórtico");
+        printf("\n 6 - Rendimento Diário por Pórtico");
+        printf("\n 7 - Tráfego diário por classe de Veículo");
+        printf("\n 8 - Rendimento diário por classe de Veículo");
         printf("\n 9 - Média Tráfego por Pórtico");
         printf("\n 10 - Tráfego Total por Pórticos");
         printf("\n 11 - Total passagens em todos os Pórticos");
@@ -131,9 +171,8 @@ int main(int argc, char const *argv[])
 
         case 3:
         {
-
             printf("\n\n Opcao escolhida: 3 ");
-            editPrices(p, nrOfporticos);
+            priceCheckForEachClass(p, nrOfporticos);
             break;
         }
 
@@ -141,6 +180,7 @@ int main(int argc, char const *argv[])
         {
 
             printf("\n\n Opcao escolhida: 4 ");
+            editPrices(p, nrOfporticos);
             break;
         }
         case 5:
