@@ -12,8 +12,26 @@ struct Portico
     float motorcyclePrice;
     float lightVehiclePrice;
     float heavyVehiclePrice;
+    //int nrMotorcyclepasses;
+    //int nrLightVehiclepasses;
+    //int nrHeavyVehicle;
 };
+/*struct Veiculo
+{
+    int id;
+    int class;
+    char licensePlate[8];
 
+};*/
+struct passage
+{
+    char licensePlate[8];
+    int vehicleClass;
+    int porticoId;  
+    int day;
+    int hour;
+};
+//Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 
 void addPortico(portico p[], int *nrOfporticos)
