@@ -12,9 +12,9 @@ struct Portico
     float motorcyclePrice;
     float lightVehiclePrice;
     float heavyVehiclePrice;
-    //int nrMotorcyclepasses;
-    //int nrLightVehiclepasses;
-    //int nrHeavyVehicle;
+    // int nrMotorcyclepasses;
+    // int nrLightVehiclepasses;
+    // int nrHeavyVehicle;
 };
 /*struct Veiculo
 {
@@ -23,16 +23,18 @@ struct Portico
     char licensePlate[8];
 
 };*/
-struct passage
+struct Passage
 {
-    char licensePlate[8];
+    int licensePlate;
     int vehicleClass;
-    int porticoId;  
+    int porticoId;
     int day;
     int hour;
 };
-//Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
+// podemos meter int id em vez de ter que usar o formato de matricula
+// Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
+typedef struct Passage passage;
 
 void addPortico(portico p[], int *nrOfporticos)
 {
@@ -98,7 +100,7 @@ void editPrices(portico p[], int nrOfporticos)
     }
 }
 
-void priceCheckForEachClass(portico p[], int nrOfporticos)
+void priceCheckForEachClass(portico porticos[], int nrOfporticos)
 {
     int porticoid;
     int porticoClass;
@@ -108,25 +110,25 @@ void priceCheckForEachClass(portico p[], int nrOfporticos)
 
     for (int i = 0; i < nrOfporticos; i++)
     {
-        if (porticoid == p[i].id)
+        if (porticoid == porticos[i].id)
         {
             printf("Escolha a class: \n");
             printf("motociclo: 1\n");
             printf("veiculos ligeiros: 2\n");
             printf("veiculos Pesados: 3\n");
             scanf("%d", &porticoClass);
-            
+
             if (porticoClass == 1)
             {
-                printf("Preco do Motociclo: %f", p[i].motorcyclePrice);
+                printf("Preco do Motociclo: %f", porticos[i].motorcyclePrice);
             }
             else if (porticoClass == 2)
             {
-                printf("Preco do veiculo ligeiro: %f", p[i].lightVehiclePrice);
+                printf("Preco do veiculo ligeiro: %f", porticos[i].lightVehiclePrice);
             }
             else if (porticoClass == 3)
             {
-                printf("Preco do veiculo Pesado: %f", p[i].heavyVehiclePrice);
+                printf("Preco do veiculo Pesado: %f", porticos[i].heavyVehiclePrice);
             }
             else
             {
@@ -138,19 +140,57 @@ void priceCheckForEachClass(portico p[], int nrOfporticos)
     printf("Este portico nao existe");
 }
 
+void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
+{
+    clearConsole();
+    passage newPassage;
+    printf("\nInsira o portico de passagem:\n");
+    scanf("%d", &newPassage.porticoId);
+    clearConsole();
+    for (int i = 0; i < nrOfporticos; i++)
+    {
+        if (newPassage.porticoId == porticos[i].id)
+        {
+            printf("Insira a matricula:\n ");
+            scanf("%d", &newPassage.licensePlate);
+            clearConsole();
+            printf("Insira a classe do veiculo:\n");
+            printf("Motociclo: 1\n");
+            printf("Veiculos ligeiros: 2\n");
+            printf("Veiculos Pesados: 3\n");
+            scanf("%d", &newPassage.vehicleClass);
+            clearConsole();
+            printf("Insira a data:\n ");
+            scanf("%d", &newPassage.day);
+            clearConsole();
+            printf("Insira a hora:\n ");
+            scanf("%d", &newPassage.hour);
+            clearConsole();
+            printf("Passagem adicionada\n\n");
+            passages[*nrOfPassages] = newPassage;
+            (*nrOfPassages)++;
+            return;
+        }
+    }
+
+    printf("Portico nao existe.");
+}
+
 int main(int argc, char const *argv[])
 {
-    int nrOfporticos = 4;
+    int nrOfPorticos = 4;
     int option;
+    int nrOfPassages = 0;
 
-    portico p[500] = {
+    portico porticos[500] = {
         {1, 3, 2, 1},
         {2, 2, 1, 3},
         {3, 1, 1, 1},
         {4, 3, 2, 1}
 
     };
-    //porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
+    // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
+    passage passages[500];
     do
     {
         printf("\n 1 - Inserir pórticos com tabela de preços");
@@ -177,20 +217,20 @@ int main(int argc, char const *argv[])
         case 1:
         {
 
-            addPortico(p, &nrOfporticos);
+            addPortico(porticos, &nrOfPorticos);
             break;
         }
         case 2:
         {
             printf("\n\n Opcao escolhida: 2 ");
-            listPorticos(p, nrOfporticos);
+            listPorticos(porticos, nrOfPorticos);
             break;
         }
 
         case 3:
         {
             printf("\n\n Opcao escolhida: 3 ");
-            priceCheckForEachClass(p, nrOfporticos);
+            priceCheckForEachClass(porticos, nrOfPorticos);
             break;
         }
 
@@ -198,13 +238,14 @@ int main(int argc, char const *argv[])
         {
 
             printf("\n\n Opcao escolhida: 4 ");
-            editPrices(p, nrOfporticos);
+            editPrices(porticos, nrOfPorticos);
             break;
         }
         case 5:
         {
 
             printf("\n\n Opcao escolhida: 5 ");
+            insertPassage(passages, &nrOfPassages, nrOfPorticos, porticos);
             break;
         }
         case 6:
