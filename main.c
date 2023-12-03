@@ -57,7 +57,29 @@ void listPorticos(portico p[], int nrOfporticos)
         printf("---------------------------------------------------------------------\n");
     }
 }
+void editPrices(portico p[], int nrOfporticos)
+{
 
+    clearConsole();
+    int EditPortico;
+    printf("Insira o número do portico que deseja editar: ");
+    scanf("%d", &EditPortico);
+
+    for (int i = 0; i < nrOfporticos; i++)
+    {
+        if (EditPortico == p[i].id)
+        {
+            printf("Insira o novo preço do motociclo: ");
+            scanf("%f", &p[i].motorcyclePrice);
+            printf("Insira o novo preço do veiculo ligeiro: ");
+            scanf("%f", &p[i].lightVehiclePrice);
+            printf("Insira o novo preço do veiculo pesado: ");
+            scanf("%f", &p[i].heavyVehiclePrice);
+            printf("Preços do Portico Atualizado!");
+            return;
+        }
+    }
+}
 int main(int argc, char const *argv[])
 {
     int nrOfporticos = 4;
@@ -75,14 +97,14 @@ int main(int argc, char const *argv[])
     {
         printf("\n 1 - Inserir pórticos com tabela de preços");
         printf("\n 2 - Listar Pórticos ");
-        printf("\n 3 - Média Tráfego por Pórtico");
-        printf("\n 4 - Tráfego Total por Pórticos");
+        printf("\n 3 - Alterar Preços do Pórtico");
+        printf("\n 4 -  Inserir passagem num Pórtico ");
         printf("\n 5 - Rendimento Diário por Pórtico ");
         printf("\n 6 - Tráfego diário por classe de Veículo");
         printf("\n 7 - Rendimento diário por classe de Veículo");
         printf("\n 8 - Preço Pórtico por classe");
-        printf("\n 9 - Alterar Preços do Pórtico");
-        printf("\n 10 - Inserir passagem num Pórtico");
+        printf("\n 9 - Média Tráfego por Pórtico");
+        printf("\n 10 - Tráfego Total por Pórticos");
         printf("\n 11 - Total passagens em todos os Pórticos");
         printf("\n 12 - Listar a passagem em um Pórtico");
         printf("\n 13 - Passagem totais de um Veiculo por Pórtico");
@@ -111,6 +133,7 @@ int main(int argc, char const *argv[])
         {
 
             printf("\n\n Opcao escolhida: 3 ");
+            editPrices(p, nrOfporticos);
             break;
         }
 
