@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <conio.h>
-void clearConsole()
+/*void clearConsole()
 {
-    printf("\033[2J\033[H");
-}
-int nrOfporticos = 4;
+    system("clear"); // For Linux/macOS
+    // or
+    system("cls");  // For Windows
+}*/
 struct Portico
 {
     int id;
@@ -17,15 +18,15 @@ struct Portico
 
 typedef struct Portico portico;
 
-void addPortico(portico p[], int nrOfporticos)
+void addPortico(portico p[], int *nrOfporticos)
 {
-    clearConsole();
+    //system("cls");
     portico newPortico;
 
     printf("insira o numero do portico: ");
     scanf("%d", &newPortico.id);
 
-    for (int i = 0; i < nrOfporticos; i++)
+    for (int i = 0; i < *nrOfporticos; i++)
     {
         if (newPortico.id == p[i].id)
         {
@@ -39,26 +40,30 @@ void addPortico(portico p[], int nrOfporticos)
     scanf("%f", &newPortico.lightVehiclePrice);
     printf("insira o preço da passagem do veiculo pesado: ");
     scanf("%f", &newPortico.heavyVehiclePrice);
-    p[nrOfporticos++] = newPortico;
+    
+    p[*nrOfporticos] = newPortico;
+    (*nrOfporticos)++;
+    
 };
 
-void listPorticos(portico p[])
+void listPorticos(portico p[] , int nrOfporticos)
 {
 
     for (int i = 0; i < nrOfporticos; i++)
     {
-        printf("\n---------------------------------------------------------------------");
-        printf("\n Numero do portico: %d \n", p[i].id);
+         printf("\n---------------------------------------------------------------------\n");
+        printf("id: %d \n", p[i].id);
         printf("Motociclos: %f \n", p[i].motorcyclePrice);
         printf("Veiculos ligeiros: %f \n", p[i].lightVehiclePrice);
         printf("Veiculos pesados %f \n", p[i].heavyVehiclePrice);
-        printf("---------------------------------------------------------------------");
+        printf("---------------------------------------------------------------------\n");
     }
-    getchar();
+    
 }
 
 int main(int argc, char const *argv[])
 {
+    int nrOfporticos = 4;
     int num;
 
     portico p[] = {
@@ -87,23 +92,23 @@ int main(int argc, char const *argv[])
         printf("\n 16 - Pórtico com maior tráfego");
         printf("\n\n Escolha uma opcao: ");
         scanf("%d", &num);
-        /* code */
+        
 
         switch (num)
         {
         case 1:
         {
 
-            addPortico(p, nrOfporticos);
+            addPortico(p, &nrOfporticos);
             break;
         }
         case 2:
         {
             printf("\n\n Opcao escolhida: 2 ");
-            listPorticos(p);
+            listPorticos(p, nrOfporticos);
             break;
         }
-
+\
         case 3:
         {
 
