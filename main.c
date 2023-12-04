@@ -31,24 +31,24 @@ struct Passage
     int day;
     int hour;
 };
-// podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.
+// podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.- Usar o formato da matricula com o Char hhh
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
 void menu();
- int nrOfPorticos = 4;
-    int option;
-    int nrOfPassages = 0;
+int nrOfPorticos = 4;
+int option;
+int nrOfPassages = 0;
 
-    portico porticos[500] = {
-        {1, 3, 2, 1},
-        {2, 2, 1, 3},
-        {3, 1, 4, 1},
-        {4, 3, 2, 1}
+portico porticos[500] = {
+    {1, 3, 2, 1},
+    {2, 2, 1, 3},
+    {3, 1, 4, 1},
+    {4, 3, 2, 1}
 
-    };
-    // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
-    passage passages[500];
+};
+// porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
+passage passages[500];
 void addPortico(portico p[], int *nrOfporticos)
 {
     clearConsole();
@@ -185,20 +185,65 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("Passagem adicionada\n\n");
             passages[*nrOfPassages] = newPassage;
             (*nrOfPassages)++;
+             menu();
             return;
         }
     }
 
     printf("Portico nao existe.");
+     menu();
+}
+void listpassage(passage passages[], int nrOfPassages)
+{
 
+    clearConsole();
+    printf("%d", nrOfPassages);
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+        printf("\n---------------------------------------------------------------------\n");
+        printf("Matricula: %d \n", passages[i].licensePlate);
+        printf("Dia: %d \n", passages[i].day);
+        printf("Hora %d\n", passages[i].hour);
+        if (passages[i].vehicleClass == 1)
+        {
+            printf("Motociclo ");
+        }
+        if (passages[i].vehicleClass == 2)
+        {
+            printf("Veiculo Ligeiro");
+        }
+        if (passages[i].vehicleClass == 3)
+        {
+            printf("Veiculo Pesado");
+        }
+    }
+     menu();
+}
+void listPassageNumPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+
+    clearConsole();
+  int porticoid;
+ 
+    printf("\nEscolha o Portico: ");
+    scanf("%d", &porticoid);
+
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+        
+        if (porticoid == passages[i].porticoId)
+        {
+            printf("%d\n",passages[i].licensePlate);
+        }
+    }
+    printf("Este portico nao existe");
     menu();
 }
 
 void menu()
 {
-   
-    printf("\n 1 - Inserir pórticos com tabela de preços");
 
+    printf("\n 1 - Inserir pórticos com tabela de preços");
     printf("\n 2 - Listar Pórticos ");
     printf("\n 3 - Preço Pórtico por classe");
     printf("\n 4 - Alterar Preços do Pórtico");
@@ -257,12 +302,14 @@ void menu()
     {
 
         printf("\n\n Opcao escolhida: 6 ");
+        listpassage(passages, nrOfPassages);
         break;
     }
     case 7:
     {
 
         printf("\n\n Opcao escolhida: 7 ");
+        listPassageNumPortico(passages, nrOfPassages, porticos, nrOfPorticos);
         break;
     }
     case 8:
