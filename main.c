@@ -187,20 +187,36 @@ void listpassage( passage passages[],  int nrOfPassages){
         printf("Hora %d\n", passages[i].hour);   
         if(passages[i].vehicleClass == 1)
             {
-                printf("Motociclo: %d", passages[i].vehicleClass);
+                printf("Motociclo ");
             }
         if(passages[i].vehicleClass == 2)
             {
-                printf("Veiculo Ligeiro: %d", passages[i].vehicleClass);
+                printf("Veiculo Ligeiro" );
             }
         if(passages[i].vehicleClass == 3)
             {
-                printf("Veiculo Pesado: %d", passages[i].vehicleClass);
+                printf("Veiculo Pesado");
             }
     }
 }
-void listPassageNumPortico(){
+void listPassageNumPortico(passage passages[],  int nrOfPassages, portico porticos[], int nrOfporticos){
 
+    clearConsole();
+    int passageid;
+    int porticoid;
+    int passageClass;
+    int passagePosition;
+    
+    printf("\nEscolha o Portico: ");
+    scanf("%d", &porticoid);
+
+     for (int i = 0; i < nrOfporticos; i++){
+        if (porticoid == porticos[i].id)
+        {
+            printf("Escolha o Pórtico: \n");
+
+        }
+     }
 
 }
 
