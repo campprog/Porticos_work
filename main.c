@@ -31,7 +31,7 @@ struct Passage
     int day;
     int hour;
 };
-// podemos meter int id em vez de ter que usar o formato de matricula
+// podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com o Char hhh
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
@@ -175,6 +175,34 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
 
     printf("Portico nao existe.");
 }
+void listpassage( passage passages[],  int nrOfPassages){
+
+    clearConsole();
+    printf("%d", nrOfPassages);
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+        printf("\n---------------------------------------------------------------------\n");
+        printf("Matricula: %d \n", passages[i].licensePlate);
+        printf("Dia: %d \n", passages[i].day);
+        printf("Hora %d\n", passages[i].hour);   
+        if(passages[i].vehicleClass == 1)
+            {
+                printf("Motociclo: %d", passages[i].vehicleClass);
+            }
+        if(passages[i].vehicleClass == 2)
+            {
+                printf("Veiculo Ligeiro: %d", passages[i].vehicleClass);
+            }
+        if(passages[i].vehicleClass == 3)
+            {
+                printf("Veiculo Pesado: %d", passages[i].vehicleClass);
+            }
+    }
+}
+void listPassageNumPortico(){
+
+
+}
 
 int main(int argc, char const *argv[])
 {
@@ -252,6 +280,7 @@ int main(int argc, char const *argv[])
         {
 
             printf("\n\n Opcao escolhida: 6 ");
+            listpassage(passages, nrOfPassages);
             break;
         }
         case 7:
