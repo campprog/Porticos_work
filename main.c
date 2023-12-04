@@ -198,8 +198,9 @@ void listpassage( passage passages[],  int nrOfPassages){
                 printf("Veiculo Pesado");
             }
     }
+
 }
-void listPassageNumPortico(passage passages[],  int nrOfPassages, portico porticos[], int nrOfporticos){
+void listPassageNumPortico(passage passages[],  int nrOfPassages, portico porticos[], int nrOfPorticos){
 
     clearConsole();
     int passageid;
@@ -210,21 +211,25 @@ void listPassageNumPortico(passage passages[],  int nrOfPassages, portico portic
     printf("\nEscolha o Portico: ");
     scanf("%d", &porticoid);
 
-     for (int i = 0; i < nrOfporticos; i++){
+     for (int i = 0; i < nrOfPassages; i++){
+        int count;
         if (porticoid == porticos[i].id)
         {
-            printf("Escolha o Pórtico: \n");
-
+            if (/*se o portico foi adicionado passagens*/)
+            {
+                /*count++*/
+            }
+            
         }
      }
-
+    printf("Este portico nao existe");
 }
 
 int main(int argc, char const *argv[])
 {
     int nrOfPorticos = 4;
     int option;
-    int nrOfPassages = 0;
+    int nrOfPassages = 4;
 
     portico porticos[500] = {
         {1, 3, 2, 1},
@@ -303,6 +308,7 @@ int main(int argc, char const *argv[])
         {
 
             printf("\n\n Opcao escolhida: 7 ");
+            listPassageNumPortico(passages, nrOfPassages, porticos, nrOfPorticos);
             break;
         }
         case 8:
