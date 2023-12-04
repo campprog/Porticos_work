@@ -35,7 +35,20 @@ struct Passage
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
+void menu();
+ int nrOfPorticos = 4;
+    int option;
+    int nrOfPassages = 0;
 
+    portico porticos[500] = {
+        {1, 3, 2, 1},
+        {2, 2, 1, 3},
+        {3, 1, 4, 1},
+        {4, 3, 2, 1}
+
+    };
+    // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
+    passage passages[500];
 void addPortico(portico p[], int *nrOfporticos)
 {
     clearConsole();
@@ -143,7 +156,7 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
     menu();
 }
 
-insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
+void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
 {
     clearConsole();
     passage newPassage;
@@ -183,19 +196,7 @@ insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico p
 
 void menu()
 {
-    int nrOfPorticos = 4;
-    int option;
-    int nrOfPassages = 0;
-
-    portico porticos[500] = {
-        {1, 3, 2, 1},
-        {2, 2, 1, 3},
-        {3, 1, 4, 1},
-        {4, 3, 2, 1}
-
-    };
-    // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
-    passage passages[500];
+   
     printf("\n 1 - Inserir pórticos com tabela de preços");
 
     printf("\n 2 - Listar Pórticos ");
@@ -334,6 +335,5 @@ void menu()
 }
 int main(int argc, char const *argv[])
 {
-
     menu();
 }
