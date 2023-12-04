@@ -31,7 +31,7 @@ struct Passage
     int day;
     int hour;
 };
-// podemos meter int id em vez de ter que usar o formato de matricula
+// podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
@@ -61,8 +61,9 @@ void addPortico(portico p[], int *nrOfporticos)
 
     p[*nrOfporticos] = newPortico;
     (*nrOfporticos)++;
+    // void menu;
+    menu();
 }
-
 void listPorticos(portico p[], int nrOfporticos)
 {
     clearConsole();
@@ -76,6 +77,7 @@ void listPorticos(portico p[], int nrOfporticos)
         printf("Veiculos pesados %f \n", p[i].heavyVehiclePrice);
         printf("---------------------------------------------------------------------\n");
     }
+    menu();
 }
 void editPrices(portico p[], int nrOfporticos)
 {
@@ -138,9 +140,10 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
         }
     }
     printf("Este portico nao existe");
+    menu();
 }
 
-void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
+insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
 {
     clearConsole();
     passage newPassage;
@@ -174,9 +177,11 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
     }
 
     printf("Portico nao existe.");
+
+    menu();
 }
 
-int main(int argc, char const *argv[])
+void menu()
 {
     int nrOfPorticos = 4;
     int option;
@@ -185,150 +190,150 @@ int main(int argc, char const *argv[])
     portico porticos[500] = {
         {1, 3, 2, 1},
         {2, 2, 1, 3},
-        {3, 1, 1, 1},
+        {3, 1, 4, 1},
         {4, 3, 2, 1}
 
     };
     // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
     passage passages[500];
-    do
+    printf("\n 1 - Inserir pórticos com tabela de preços");
+
+    printf("\n 2 - Listar Pórticos ");
+    printf("\n 3 - Preço Pórtico por classe");
+    printf("\n 4 - Alterar Preços do Pórtico");
+    printf("\n 5 - Inserir passagem num Pórtico");
+    printf("\n 6 - Rendimento Diário por Pórtico");
+    printf("\n 7 - Tráfego diário por classe de Veículo");
+    printf("\n 8 - Rendimento diário por classe de Veículo");
+    printf("\n 9 - Média Tráfego por Pórtico");
+    printf("\n 10 - Tráfego Total por Pórticos");
+    printf("\n 11 - Total passagens em todos os Pórticos");
+    printf("\n 12 - Listar a passagem em um Pórtico");
+    printf("\n 13 - Passagem totais de um Veiculo por Pórtico");
+    printf("\n 14 - Rendimento total");
+    printf("\n 15 - Total de gastos por Veículo");
+    printf("\n 16 - Pórtico com maior tráfego");
+    printf("\n\n Escolha uma opcao: ");
+    scanf("%d", &option);
+
+    switch (option)
     {
-        printf("\n 1 - Inserir pórticos com tabela de preços");
-        printf("\n 2 - Listar Pórticos ");
-        printf("\n 3 - Preço Pórtico por classe");
-        printf("\n 4 - Alterar Preços do Pórtico");
-        printf("\n 5 - Inserir passagem num Pórtico");
-        printf("\n 6 - Rendimento Diário por Pórtico");
-        printf("\n 7 - Tráfego diário por classe de Veículo");
-        printf("\n 8 - Rendimento diário por classe de Veículo");
-        printf("\n 9 - Média Tráfego por Pórtico");
-        printf("\n 10 - Tráfego Total por Pórticos");
-        printf("\n 11 - Total passagens em todos os Pórticos");
-        printf("\n 12 - Listar a passagem em um Pórtico");
-        printf("\n 13 - Passagem totais de um Veiculo por Pórtico");
-        printf("\n 14 - Rendimento total");
-        printf("\n 15 - Total de gastos por Veículo");
-        printf("\n 16 - Pórtico com maior tráfego");
-        printf("\n\n Escolha uma opcao: ");
-        scanf("%d", &option);
+    case 1:
+    {
 
-        switch (option)
-        {
-        case 1:
-        {
+        addPortico(porticos, &nrOfPorticos);
+        break;
+    }
+    case 2:
+    {
+        printf("\n\n Opcao escolhida: 2 ");
+        listPorticos(porticos, nrOfPorticos);
+        break;
+    }
 
-            addPortico(porticos, &nrOfPorticos);
-            break;
-        }
-        case 2:
-        {
-            printf("\n\n Opcao escolhida: 2 ");
-            listPorticos(porticos, nrOfPorticos);
-            break;
-        }
+    case 3:
+    {
+        printf("\n\n Opcao escolhida: 3 ");
+        priceCheckForEachClass(porticos, nrOfPorticos);
+        break;
+    }
 
-        case 3:
-        {
-            printf("\n\n Opcao escolhida: 3 ");
-            priceCheckForEachClass(porticos, nrOfPorticos);
-            break;
-        }
+    case 4:
+    {
 
-        case 4:
-        {
+        printf("\n\n Opcao escolhida: 4 ");
+        editPrices(porticos, nrOfPorticos);
+        break;
+    }
+    case 5:
+    {
 
-            printf("\n\n Opcao escolhida: 4 ");
-            editPrices(porticos, nrOfPorticos);
-            break;
-        }
-        case 5:
-        {
+        printf("\n\n Opcao escolhida: 5 ");
+        insertPassage(passages, &nrOfPassages, nrOfPorticos, porticos);
+        break;
+    }
+    case 6:
+    {
 
-            printf("\n\n Opcao escolhida: 5 ");
-            insertPassage(passages, &nrOfPassages, nrOfPorticos, porticos);
-            break;
-        }
-        case 6:
-        {
+        printf("\n\n Opcao escolhida: 6 ");
+        break;
+    }
+    case 7:
+    {
 
-            printf("\n\n Opcao escolhida: 6 ");
-            break;
-        }
-        case 7:
-        {
+        printf("\n\n Opcao escolhida: 7 ");
+        break;
+    }
+    case 8:
+    {
 
-            printf("\n\n Opcao escolhida: 7 ");
-            break;
-        }
-        case 8:
-        {
+        printf("\n\n Opcao escolhida: 8 ");
+        break;
+    }
+    case 9:
+    {
 
-            printf("\n\n Opcao escolhida: 8 ");
-            break;
-        }
-        case 9:
-        {
+        printf("\n\n Opcao escolhida: 9 ");
+        break;
+    }
+    case 10:
+    {
 
-            printf("\n\n Opcao escolhida: 9 ");
-            break;
-        }
-        case 10:
-        {
+        printf("\n\n Opcao escolhida: 10 ");
+        break;
+    }
+    case 11:
+    {
 
-            printf("\n\n Opcao escolhida: 10 ");
-            break;
-        }
-        case 11:
-        {
+        printf("\n\n Opcao escolhida: 11 ");
+        break;
+    }
+    case 12:
+    {
 
-            printf("\n\n Opcao escolhida: 11 ");
-            break;
-        }
-        case 12:
-        {
+        printf("\n\n Opcao escolhida: 12 ");
+        break;
+    }
+    case 13:
+    {
 
-            printf("\n\n Opcao escolhida: 12 ");
-            break;
-        }
-        case 13:
-        {
+        printf("\n\n Opcao escolhida: 13 ");
+        break;
+    }
+    case 14:
+    {
 
-            printf("\n\n Opcao escolhida: 13 ");
-            break;
-        }
-        case 14:
-        {
+        printf("\n\n Opcao escolhida: 14 ");
+        break;
+    }
+    case 15:
+    {
 
-            printf("\n\n Opcao escolhida: 14 ");
-            break;
-        }
-        case 15:
-        {
+        printf("\n\n Opcao escolhida: 15 ");
+        break;
+    }
+    case 16:
+    {
 
-            printf("\n\n Opcao escolhida: 15 ");
-            break;
-        }
-        case 16:
-        {
+        printf("\n\n Opcao escolhida: 16 ");
+        break;
+    }
+    default:
+    {
 
-            printf("\n\n Opcao escolhida: 16 ");
-            break;
-        }
-        default:
-        {
+        printf("\n\n Opcao invalida ");
+        break;
+    }
+    case 17:
+    {
 
-            printf("\n\n Opcao invalida ");
-            break;
-        }
-        case 17:
-        {
+        printf("\n\n Sair do programa");
+        break;
+    }
+    }
+}
+int main(int argc, char const *argv[])
+{
 
-            printf("\n\n Sair do programa");
-            break;
-        }
-        }
-
-    } while (option != 17);
-
-    return 0;
+    menu();
 }
