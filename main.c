@@ -193,7 +193,6 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             return;
         }
     }
-
     printf("Portico nao existe.");
      menu();
 }
@@ -245,7 +244,47 @@ void listPassageNumPortico(passage passages[], int nrOfPassages, portico portico
     
     menu();
 }
+void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+      clearConsole();
+    int vehicleClass;
+    int totalRendimento = 0;
 
+    printf("Escolha a classe que  deseja ver o rendimento:\n");
+    printf("1 - Motociclo\n");
+    printf("2 - Veículo ligeiro\n");
+    printf("3 - Veículo pesado\n");
+    printf("Escolha: ");
+    scanf("%d", &vehicleClass);
+
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+        for (int j = 0; j < nrOfPorticos; j++)
+        {
+            if ( passages[i].porticoId == porticos[j].id && passages[i].vehicleClass == vehicleClass)
+            {
+                switch (vehicleClass)
+                {
+                case 1:
+                    totalRendimento = totalRendimento + porticos[j].motorcyclePrice;
+                    break;
+                case 2:
+                    totalRendimento = totalRendimento + porticos[j].lightVehiclePrice;
+                    break;
+                case 3:
+                    totalRendimento =  totalRendimento + porticos[j].heavyVehiclePrice;
+                    break;
+                default:
+                    printf("Classe de veículo inválida\n");
+                }
+                break;
+            }
+        }
+    }
+    printf("Rendimento diário total para a classe escolhida é: %d\n", totalRendimento);
+
+    menu();
+}
 void menu()
 {
 
@@ -272,7 +311,7 @@ void menu()
     {
     case 1:
     {
-
+        printf("\n\n Opcao escolhida: 2 ");
         addPortico(porticos, &nrOfPorticos);
         break;
     }
@@ -322,6 +361,7 @@ void menu()
     {
 
         printf("\n\n Opcao escolhida: 8 ");
+        RendimentoPorClasse(passages, nrOfPassages, porticos, nrOfPorticos);
         break;
     }
     case 9:
