@@ -285,6 +285,28 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
 
     menu();
 }
+void averagePassagesPerPortico(passage passages[],int nrOfPorticos){
+
+    int porticoId;
+    
+    int soma = 0;
+    printf("escolha o portico: ");
+   
+    scanf("%d", &porticoId);
+
+    for (int i = 0; i < nrOfPorticos; i++)
+    {
+        if (porticoId == passages[i].porticoId)
+        {
+           soma = soma + 1;
+           
+        }
+        
+    }
+    printf("Em media passam %d por %d portico em 24h", soma, porticoId);
+
+}
+
 void menu()
 {
 
@@ -366,7 +388,7 @@ void menu()
     }
     case 9:
     {
-
+        averagePassagesPerPortico(passages, nrOfPorticos);
         printf("\n\n Opcao escolhida: 9 ");
         break;
     }
