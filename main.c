@@ -112,7 +112,10 @@ void editPrices(portico p[], int nrOfporticos)
             printf("Preços do Portico Atualizado!");
             return;
         }
+        
     }
+    menu();
+    
 }
 
 void priceCheckForEachClass(portico porticos[], int nrOfporticos)
@@ -154,6 +157,7 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
     }
     printf("Este portico nao existe");
     menu();
+    return;
 }
 
 void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
@@ -233,10 +237,12 @@ void listPassageNumPortico(passage passages[], int nrOfPassages, portico portico
         
         if (porticoid == passages[i].porticoId)
         {
-            printf("%d\n",passages[i].licensePlate);
+            printf("A matricula do veiculo %d\n",passages[i].licensePlate);
+        }else{
+            printf("Este portico nao existe");
         }
     }
-    printf("Este portico nao existe");
+    
     menu();
 }
 
@@ -249,16 +255,16 @@ void menu()
     printf("\n 4 - Alterar Preços do Pórtico");
     printf("\n 5 - Inserir passagem num Pórtico");
     printf("\n 6 - Rendimento Diário por Pórtico");
-    printf("\n 7 - Tráfego diário por classe de Veículo");
+    printf("\n 7 - Listar a passagem em um Pórtico");
     printf("\n 8 - Rendimento diário por classe de Veículo");
     printf("\n 9 - Média Tráfego por Pórtico");
-    printf("\n 10 - Tráfego Total por Pórticos");
-    printf("\n 11 - Total passagens em todos os Pórticos");
-    printf("\n 12 - Listar a passagem em um Pórtico");
-    printf("\n 13 - Passagem totais de um Veiculo por Pórtico");
-    printf("\n 14 - Rendimento total");
-    printf("\n 15 - Total de gastos por Veículo");
-    printf("\n 16 - Pórtico com maior tráfego");
+    printf("\n 10 -Tráfego Total por Pórticos");
+    printf("\n 11 -Total passagens em todos os Pórticos");
+    printf("\n 12 -Tráfego diário por classe de Veículo");
+    printf("\n 13 -Passagem totais de um Veiculo por Pórtico");
+    printf("\n 14 -Rendimento total");
+    printf("\n 15 -Total de gastos por Veículo");
+    printf("\n 16 -Pórtico com maior tráfego");
     printf("\n\n Escolha uma opcao: ");
     scanf("%d", &option);
 
