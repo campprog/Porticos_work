@@ -251,7 +251,8 @@ void listPassageNumPortico(passage passages[], int nrOfPassages, portico portico
         if (porticoid == passages[i].porticoId)
         {
             printf("A matricula do veiculo %d\n",passages[i].licensePlate);
-        }else{
+        }
+        else{
             printf("Este portico nao existe");
         }
     }
@@ -345,6 +346,18 @@ void totalTraficoPorPortico(passage passages[], int nrOfPassages, portico portic
     {
         printf("Não há passagens registadas neste Pórtico %d\n", porticoId);
     }
+    menu();
+}
+void totalPassagePorticos(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+    clearConsole();
+    int porticoId;
+    int totalPassagePorticos = 0;
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+            totalPassagePorticos++;
+    }
+    printf("O Total de Passagens em todos os Pórticos é de:%d", totalPassagePorticos);
     menu();
 }
 
@@ -459,7 +472,7 @@ void menu()
     }
     case 11:
     {
-
+         totalPassagePorticos( passages, nrOfPassages,  porticos,  nrOfPorticos);
         printf("\n\n Opcao escolhida: 11 ");
         break;
     }
