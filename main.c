@@ -64,7 +64,7 @@ void addPortico(portico p[], int *nrOfporticos)
     {
         if (newPortico.id == p[i].id)
         {
-            printf("ja existe esse numero");
+            printf("ja existe esse Pórtico");
             return;
         }
     }
@@ -129,12 +129,13 @@ void editPrices(portico p[], int nrOfporticos)
             scanf("%f", &p[i].heavyVehiclePrice);
             printf("Preços do Portico Atualizado!");
             printf("\033[0m"); 
-            return;
-        }
-        
+        } 
+        else
+        {
+            printf("Este Pórtico não existe");
+        }  
     }
-    menu();
-    
+    menu();   
 }
 
 void priceCheckForEachClass(portico porticos[], int nrOfporticos)
@@ -182,7 +183,6 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
     printf("Este portico nao existe");
     printf("\033[0m"); 
     menu();
-    return;
 }
 
 void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
@@ -237,21 +237,32 @@ void listpassage(passage passages[], int nrOfPassages)
     printf("%d", nrOfPassages);
     for (int i = 0; i < nrOfPassages; i++)
     {
-        printf("\n---------------------------------------------------------------------\n");
-        printf("Matricula: %d \n", passages[i].licensePlate);
-        printf("Dia: %d \n", passages[i].day);
-        printf("Hora %d\n", passages[i].hour);
+        printf("\033[1;37m"); 
+        printf("\n|------------------------------------------------------------|");
+        printf("\n|Matricula: %d                                                |", passages[i].licensePlate);
+        printf("\n|------------------------------------------------------------|");
+        printf("\n|Dia: %d                                                      |", passages[i].day);
+        printf("\n|------------------------------------------------------------|");
+        printf("\n|Hora %d                                                      |", passages[i].hour);
+        printf("\n|------------------------------------------------------------|");
         if (passages[i].vehicleClass == 1)
         {
-            printf("Motociclo ");
+            printf("\n|------------------------------------------------------------|");
+            printf("\n|Motociclo                                                   |");
+            printf("\n|------------------------------------------------------------|");
         }
         if (passages[i].vehicleClass == 2)
         {
-            printf("Veiculo Ligeiro");
+            printf("\n|------------------------------------------------------------|");
+            printf("\n|Veiculo Ligeiro                                             |");
+            printf("\n|------------------------------------------------------------|");
         }
         if (passages[i].vehicleClass == 3)
         {
-            printf("Veiculo Pesado");
+            printf("\n|------------------------------------------------------------|");
+            printf("\n|Veiculo Pesado                                              |");
+            printf("\n|------------------------------------------------------------|");
+            printf("\033[0m"); 
         }
     }
      menu();
@@ -284,16 +295,20 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
       clearConsole();
     int vehicleClass;
     int totalRendimento = 0;
-
-    printf("Escolha a classe que  deseja ver o rendimento:\n");
-    printf("1 - Motociclo\n");
-    printf("2 - Veículo ligeiro\n");
-    printf("3 - Veículo pesado\n");
-    printf("Escolha: ");
+    printf("\033[1;37m"); 
+    printf("\n|------------------------------------------------------------|");
+    printf("\n|Escolha a classe que  deseja ver o rendimento:              |");
+    printf("\n|------------------------------------------------------------|");
+    printf("\n|1 - Motociclo                                               |");
+    printf("\n|2 - Veículo ligeiro                                         |");
+    printf("\n|3 - Veículo pesado                                          |");
+    printf("\n|------------------------------------------------------------|");
+    printf("\n|Escolha:");
     scanf("%d", &vehicleClass);
 
     int dayToCheck;
-    printf("Insira o dia desejado: ");
+    printf("\n|------------------------------------------------------------|");
+    printf("\n|Insira o dia desejado:");
     scanf("%d", &dayToCheck);
 
     for (int i = 0; i < nrOfPassages; i++)
@@ -320,7 +335,9 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
             }
         }
     }
-    printf("Rendimento diário total para a classe escolhida é: %d\n", totalRendimento);
+
+    printf("\n Rendimento diário total para a classe escolhida é de  %d Euros\n", totalRendimento);
+    printf("\033[0m"); 
 
     menu();
 }
@@ -329,6 +346,7 @@ void averagePassagesPerPortico(passage passages[],int nrOfPorticos){
     int porticoId;
     
     int soma = 0;
+    printf("\033[1;37m"); 
     printf("escolha o portico: ");
    
     scanf("%d", &porticoId);
@@ -343,6 +361,7 @@ void averagePassagesPerPortico(passage passages[],int nrOfPorticos){
         
     }
     printf("Em media passam %d por %d portico em 24h", soma, porticoId);
+    printf("\033[0m"); 
      menu();
 }
 void totalTraficoPorPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
@@ -350,7 +369,7 @@ void totalTraficoPorPortico(passage passages[], int nrOfPassages, portico portic
     clearConsole();
     int porticoId;
     int totalTrafico = 0;
-
+    printf("\033[1;37m"); 
     printf("\nEscolha o Portico: ");
     scanf("%d", &porticoId);
 
@@ -369,6 +388,7 @@ void totalTraficoPorPortico(passage passages[], int nrOfPassages, portico portic
     else
     {
         printf("Não há passagens registadas neste Pórtico %d\n", porticoId);
+        printf("\033[0m"); 
     }
     menu();
 }
@@ -385,11 +405,13 @@ void totalPassagePorticos(passage passages[], int nrOfPassages, portico porticos
     }
     if(totalPassagePorticos > 0)
     {
+        printf("\033[1;37m"); 
         printf("O total de Passagens em Todos os Porticos é de %d passagens", totalPassagePorticos);
     }
     else
     {
         printf("Não existe qualquer passagem nos Pórticos");
+        printf("\033[0m"); 
     }
     menu();
 }
@@ -398,7 +420,7 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
     {
     clearConsole();
     int vehicleClass;
-      printf("\033[1;37m"); 
+    printf("\033[1;37m"); 
     printf("\n|------------------------------------------------------|");
     printf("\n|Escolha a classe de veículo:                          |");
     printf("\n|------------------------------------------------------|");
@@ -406,7 +428,6 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
     printf("\n|2 - Veículo Ligeiro                                   |");
     printf("\n|3 - Veículo Pesado                                    |");
     printf("\n|------------------------------------------------------|\n");
-      printf("\033[0m"); 
     scanf("%d", &vehicleClass);
 
     int totalTrafegoDiario = 0;
@@ -432,6 +453,7 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
         break;
     default:
         printf("Classe de veículo inválida\n");
+        printf("\033[0m"); 
         break;
     }
 
@@ -443,6 +465,7 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
     int totalPassagensVeiculo = 0;
     int porticoId;
     int licensePlate;
+    printf("\033[1;37m"); 
     printf("\n|--------------------------------------------------|");
     printf("\n|Insira o Pórtico:\n");
     scanf("%d", &porticoId);
@@ -457,9 +480,32 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
     }
 
     printf("Total de passagens do veículo %d no portico %d: %d\n", licensePlate, porticoId, totalPassagensVeiculo);
+    printf("\033[0m"); 
 
     menu();
 }
+void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+    int valorRendimentoTotal = 0;
+    for (int i = 0; i < nrOfPassages; i++){
+        for (int j = 0; j < nrOfPorticos; j++) {
+            if(passages[i].porticoId == porticos[j].id)
+            {
+                 valorRendimentoTotal++;
+            }
+        }
+    }
+        if(valorRendimentoTotal > 0)
+        {
+            printf("A soma dos Preços de todas as passagens é de %d Euros");
+        }
+        else
+        {
+            printf("Não existe qualquer passagem registada");
+        }
+        menu();
+}
+
 void menu()
 {
     printf("\033[1;37m"); 
@@ -506,6 +552,7 @@ void menu()
     {
     case 1:
     {
+        printf("\033[1;37m"); 
         printf("\n\n Opcao escolhida: 2 ");
         addPortico(porticos, &nrOfPorticos);
         break;
@@ -591,7 +638,7 @@ void menu()
     }
     case 14:
     {
-
+        RendimentoTotal( passages,  nrOfPassages,  porticos,  nrOfPorticos);
         printf("\n\n Opcao escolhida: 14 ");
         break;
     }
@@ -617,6 +664,7 @@ void menu()
     {
 
         printf("\n\n Sair do programa");
+        printf("\033[0m"); 
         break;
     }
     }
