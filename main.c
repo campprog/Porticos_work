@@ -292,11 +292,15 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     printf("Escolha: ");
     scanf("%d", &vehicleClass);
 
+    int dayToCheck;
+    printf("Insira o dia desejado: ");
+    scanf("%d", &dayToCheck);
+
     for (int i = 0; i < nrOfPassages; i++)
     {
         for (int j = 0; j < nrOfPorticos; j++)
         {
-            if ( passages[i].porticoId == porticos[j].id && passages[i].vehicleClass == vehicleClass)
+            if (passages[i].porticoId == porticos[j].id && passages[i].vehicleClass == vehicleClass && passages[i].day == dayToCheck)
             {
                 switch (vehicleClass)
                 {
@@ -418,13 +422,13 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
     switch (vehicleClass)
     {
     case 1:
-        printf("O tráfego diário de Motociclos é de: %d passagens\n",  totalTrafegoDiario);
+        printf("O tráfego de Motociclos é de: %d passagens\n",  totalTrafegoDiario);
         break;
     case 2:
-        printf("O tráfego diário de Veículos Ligeiros é de: %d passagens\n",  totalTrafegoDiario);
+        printf("O tráfego de Veículos Ligeiros é de: %d passagens\n",  totalTrafegoDiario);
         break;
     case 3:
-        printf("O tráfego diário de Veículos Pesados é de: %d passagens\n",  totalTrafegoDiario);
+        printf("O tráfego de Veículos Pesados é de: %d passagens\n",  totalTrafegoDiario);
         break;
     default:
         printf("Classe de veículo inválida\n");
@@ -435,42 +439,65 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
 }
 }
 
+void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos) {
+    int totalPassagensVeiculo = 0;
+    int porticoId;
+    int licensePlate;
+    printf("\n|--------------------------------------------------|");
+    printf("\n|Insira o Pórtico:\n");
+    scanf("%d", &porticoId);
+    printf("\n|--------------------------------------------------|");
+    printf("\n|Insira a matricula do veiculo:\n");
+    scanf("%d", &licensePlate);
+
+    for (int i = 0; i < nrOfPassages; i++) {
+        if (passages[i].porticoId == porticoId && passages[i].licensePlate == licensePlate) {
+            totalPassagensVeiculo++;
+        }
+    }
+
+    printf("Total de passagens do veículo %d no portico %d: %d\n", licensePlate, porticoId, totalPassagensVeiculo);
+
+    menu();
+}
 void menu()
 {
     printf("\033[1;37m"); 
-    printf("\n|=======================MENU===========================|");
-    printf("\n| 1 - Inserir pórticos com tabela de preços          --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 2 - Listar Pórticos                                --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 3 - Preço Pórtico por classe                       --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 4 - Alterar Preços do Pórtico                      --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 5 - Inserir passagem num Pórtico                   --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 6 - Listar as passagens de todos os Pórticos       --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 7 - Listar a passagem em um Pórtico                --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 8 - Rendimento diário por classe de Veículo        --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 9 - Média Tráfego por Pórtico                      --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 10 -Tráfego Total por Pórticos                     --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 11 -Total passagens em todos os Pórticos           --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 12 -Tráfego diário por classe de Veículo           --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 13 -Passagem totais de um Veiculo por Pórtico      --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 14 -Rendimento total                               --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 15 -Total de gastos por Veículo                    --|");
-    printf("\n|------------------------------------------------------|");
-    printf("\n| 16 -Pórtico com maior tráfego                      --|");
-    printf("\n|======================================================|");
+    printf("\n|===============================MENU==============================|");
+    printf("\n| 1 - Inserir pórticos com tabela de preços                     --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 2 - Listar Pórticos                                           --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 3 - Preço Pórtico por classe                                  --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 4 - Alterar Preços do Pórtico                                 --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 5 - Inserir passagem num Pórtico                              --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 6 - Listar as passagens de todos os Pórticos                  --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 7 - Listar a passagem em um Pórtico                           --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 8 - Rendimento diário por classe de Veículo                   --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 9 - Média Tráfego por Pórtico                                 --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 10 -Tráfego Total por Pórticos                                --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 11 -Total passagens em todos os Pórticos                      --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 12 -Tráfego classe de Veículo em todos os Pórticos            --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 13 -Passagem totais de um  Veiculo em um Pórtico              --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 14 -Rendimento total das passagens                            --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 15 -Total de gastos por Veículo em todos os Pórticos          --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 16 -Pórtico com maior tráfego                                 --|");
+    printf("\n|-----------------------------------------------------------------|");
+    printf("\n| 17 -Rendimento diário por Pórtico                             --|");
+    printf("\n|=================================================================|");
     printf("\n|Escolha uma opcao:");
     printf("\033[0m");
     scanf("%d", &option);
@@ -558,7 +585,7 @@ void menu()
     }
     case 13:
     {
-
+        PassagensVeiculoPorPortico( passages,  nrOfPassages, porticos, nrOfPorticos);
         printf("\n\n Opcao escolhida: 13 ");
         break;
     }
