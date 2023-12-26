@@ -523,24 +523,24 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
 }
 void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
-    int valorRendimentoTotal = 0;
-    for (int i = 0; i < nrOfPassages; i++){
-        for (int j = 0; j < nrOfPorticos; j++) {
-            if(passages[i].porticoId == porticos[j].id)
+    int vehicleClass;
+    float valorRendimentoTotal = 0;
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+        for (int j = 0; j < nrOfPorticos; j++)
+        {
+            if (passages[i].porticoId == porticos[j].id)
             {
+<<<<<<< HEAD
                  
+=======
+                    valorRendimentoTotal = valorRendimentoTotal + porticos[j].motorcyclePrice + porticos[j].lightVehiclePrice + porticos[j].heavyVehiclePrice;
+                    break;
+>>>>>>> 0bd0334afca6c533c719d3e4f50e07fa99b8f4b3
             }
         }
     }
-        if(valorRendimentoTotal > 0)
-        {
-            printf("A soma dos Preços de todas as passagens é de %d Euros");
-        }
-        else
-        {
-            printf("Não existe qualquer passagem registada");
-        }
-        menu();
+    printf("O valor do Rendimento total é de %0.1f Euros", valorRendimentoTotal);
 }
 
 void menu()
