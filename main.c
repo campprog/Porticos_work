@@ -311,30 +311,67 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     printf("\n|Insira o dia desejado:");
     scanf("%d", &dayToCheck);
 
-    for (int i = 0; i < nrOfPassages; i++)
-    {
-        for (int j = 0; j < nrOfPorticos; j++)
-        {
-            if (passages[i].porticoId == porticos[j].id && passages[i].vehicleClass == vehicleClass && passages[i].day == dayToCheck)
+        for(int i = 0; i < nrOfPassages; i++){
+
+            if (passages[i].day == dayToCheck && passages[i].vehicleClass)
             {
-                switch (vehicleClass)
+               for(int j = 0; j < nrOfPorticos; j++)
+               {
+                if(porticos[j].id == passages[i].porticoId)
                 {
-                case 1:
-                    totalRendimento = totalRendimento + porticos[j].motorcyclePrice;
-                    break;
-                case 2:
-                    totalRendimento = totalRendimento + porticos[j].lightVehiclePrice;
-                    break;
-                case 3:
-                    totalRendimento =  totalRendimento + porticos[j].heavyVehiclePrice;
-                    break;
-                default:
-                    printf("Classe de veículo inválida\n");
+                    switch (vehicleClass)
+                    {
+                    case 1:
+                        totalRendimento += porticos[j].motorcyclePrice;
+                        break;
+                    case 2:
+                        totalRendimento += porticos[j].motorcyclePrice;
+                        break;
+                    case 3:
+                        totalRendimento += porticos[j].motorcyclePrice;
+                        break;
+                    default:
+                        printf("Classe de veículo inválida\n");
+                        break;
+                    }
                 }
-                break;
+               }
             }
+            
+
         }
-    }
+
+
+
+
+
+    // for (int i = 0; i < nrOfPassages; i++)
+    // 
+    //     for (int j = 0; j < nrOfPorticos; j++)
+    //     {
+    //         if(passages[i].day == dayToCheck){
+                
+    //         if (passages[i].porticoId == porticos[j].id && passages[i].vehicleClass == vehicleClass )
+    //         {
+    //             switch (vehicleClass)
+    //             {
+    //             case 1:
+    //                 totalRendimento = totalRendimento + porticos[j].motorcyclePrice;
+    //                 break;
+    //             case 2:
+    //                 totalRendimento = totalRendimento + porticos[j].lightVehiclePrice;
+    //                 break;
+    //             case 3:
+    //                 totalRendimento =  totalRendimento + porticos[j].heavyVehiclePrice;
+    //                 break;
+    //             default:
+                    
+    //             }
+    //             break;
+    //         }
+    //         }
+    //     }
+    // }
 
     printf("\n Rendimento diário total para a classe escolhida é de  %d Euros\n", totalRendimento);
     printf("\033[0m"); 
@@ -491,7 +528,7 @@ void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], i
         for (int j = 0; j < nrOfPorticos; j++) {
             if(passages[i].porticoId == porticos[j].id)
             {
-                 valorRendimentoTotal++;
+                 
             }
         }
     }
@@ -669,7 +706,9 @@ void menu()
     }
     }
 }
+
 int main(int argc, char const *argv[])
 {
     menu();
+    
 }
