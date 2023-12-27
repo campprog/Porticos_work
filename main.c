@@ -340,11 +340,6 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
             
 
         }
-
-
-
-
-
     // for (int i = 0; i < nrOfPassages; i++)
     // 
     //     for (int j = 0; j < nrOfPorticos; j++)
@@ -583,7 +578,60 @@ void gastoVeiculoAPorticos(passage passages[], int nrOfPassages, portico portico
     printf("O veiculo com matricula %d teve um gasto total de %d Euros", licensePlate, gastosVeiculo);
     printf("\033[0m"); 
     menu();
-  }
+}
+void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+    int dayToCheck;
+    float rendimentoTotalPortico;
+    int porticoId;
+    printf("\033[1;37m"); 
+    printf("Insira o Dia");
+    scanf("%d", &dayToCheck);
+    printf("Insira o Portico");
+    scanf("%d", &porticoId);
+
+    for(int i = 0; i < nrOfPassages; i++)
+    {
+            if (passages[i].day == dayToCheck)
+            {
+               for(int j = 0; j < nrOfPorticos; j++)
+               {
+                if(porticos[j].id == passages[i].porticoId)
+                {
+                    switch (passages[i].vehicleClass)
+                    {
+                    case 1:
+                        rendimentoTotalPortico += porticos[j].motorcyclePrice;
+                        break;
+                    case 2:
+                        rendimentoTotalPortico += porticos[j].lightVehiclePrice;
+                        break;
+                    case 3:
+                        rendimentoTotalPortico += porticos[j].heavyVehiclePrice;
+                        break;
+                    default:
+                        printf("Classe de veículo inválida\n");
+                        break;
+                    }
+                }
+            }
+       }
+    }
+    if (rendimentoTotalPortico > 0)
+    {
+       printf("o rendimento Diário do Portico %d no dia %d é de %0.1f", porticoId, dayToCheck, rendimentoTotalPortico);
+    }
+    else
+    {
+        printf("Não existe qualquer rendimento neste Portico");
+        printf("\033[0m"); 
+    }
+    menu();
+}
+void porticoMaiorTrafego(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+
+}
 
 void menu()
 {
@@ -723,7 +771,7 @@ void menu()
     }
     case 15:
     {
-
+        gastoVeiculoAPorticos(passages,  nrOfPassages,porticos, nrOfPorticos);
         printf("\n\n Opcao escolhida: 15 ");
         break;
     }
@@ -733,15 +781,14 @@ void menu()
         printf("\n\n Opcao escolhida: 16 ");
         break;
     }
-    default:
-    {
-
-        printf("\n\n Opcao invalida ");
-        break;
-    }
     case 17:
     {
-
+        rendimentoDiarioPorPortico(passages, nrOfPassages,  porticos, nrOfPorticos);
+        printf("\n\n Opcao escolhida: 16 ");
+        break;
+    }
+    default:
+    {
         printf("\n\n Sair do programa");
         printf("\033[0m"); 
         break;
