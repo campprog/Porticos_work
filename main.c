@@ -497,7 +497,6 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
     menu();
 }
 }
-
 void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos) {
     int totalPassagensVeiculo = 0;
     int porticoId;
@@ -523,25 +522,68 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
 }
 void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
-    int vehicleClass;
-    float valorRendimentoTotal = 0;
+    float valorRendimentoTotal;
     for (int i = 0; i < nrOfPassages; i++)
     {
         for (int j = 0; j < nrOfPorticos; j++)
         {
             if (passages[i].porticoId == porticos[j].id)
             {
-<<<<<<< HEAD
-                 
-=======
-                    valorRendimentoTotal = valorRendimentoTotal + porticos[j].motorcyclePrice + porticos[j].lightVehiclePrice + porticos[j].heavyVehiclePrice;
+                switch (passages[i].vehicleClass)
+                {
+                case 1:
+                    valorRendimentoTotal += porticos[j].motorcyclePrice;
                     break;
->>>>>>> 0bd0334afca6c533c719d3e4f50e07fa99b8f4b3
+                case 2:
+                    valorRendimentoTotal += porticos[j].lightVehiclePrice;
+                    break;
+                case 3:
+                    valorRendimentoTotal += porticos[j].heavyVehiclePrice;
+                    break;
+                default:
+                    printf("Classe de veículo inválida\n");
+                }
+                break;
             }
         }
     }
-    printf("O valor do Rendimento total é de %0.1f Euros", valorRendimentoTotal);
+    printf("O valor do Rendimento total é de %0.1f Euros\n", valorRendimentoTotal);
+    menu();
 }
+void gastoVeiculoAPorticos(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
+{
+    int licensePlate;
+    int gastosVeiculo;
+    printf("\033[1;37m"); 
+    printf("\n|--------------------------------------------------|");
+    printf("\n|Insira a matricula do veiculo:\n");
+    scanf("%d", &licensePlate);
+    for (int i = 0; i < nrOfPassages; i++) {
+        for(int j = 0; j < nrOfPorticos; j++){
+        if (passages[i].porticoId == porticos[j].id && passages[i].licensePlate == licensePlate)
+        {
+             switch (passages[i].vehicleClass)
+                {
+                case 1:
+                    gastosVeiculo += porticos[j].motorcyclePrice;
+                    break;
+                case 2:
+                    gastosVeiculo += porticos[j].lightVehiclePrice;
+                    break;
+                case 3:
+                    gastosVeiculo += porticos[j].heavyVehiclePrice;
+                    break;
+                default:
+                    printf("Classe de veículo inválida\n");
+                }
+                break;
+            }
+        }
+    }
+    printf("O veiculo com matricula %d teve um gasto total de %d Euros", licensePlate, gastosVeiculo);
+    printf("\033[0m"); 
+    menu();
+  }
 
 void menu()
 {
