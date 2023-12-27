@@ -26,16 +26,23 @@ struct Portico
 };*/
 struct Passage
 {
-    int licensePlate;
+    char licensePlate[10];
     int vehicleClass;
     int porticoId;
     int day;
     int hour;
 };
+
+struct licencePlate
+{
+    char letters[3];
+    int numbers;
+};
 // podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.- Usar o formato da matricula com o Char hhh
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
+typedef struct licencePlate plate;
 void menu();
 int nrOfPorticos = 4;
 int option;
@@ -50,6 +57,7 @@ portico porticos[500] = {
 };
 // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
 passage passages[500];
+plate plates[500];
 void addPortico(portico p[], int *nrOfporticos)
 {
     clearConsole();
@@ -139,7 +147,6 @@ void editPrices(portico p[], int nrOfporticos)
             }
     menu();   
 }
-
 void priceCheckForEachClass(portico porticos[], int nrOfporticos)
 {
     int porticoid;
@@ -191,7 +198,6 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
     printf("\033[0m"); 
     menu();
 }
-
 void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, portico porticos[])
 {
     clearConsole();
@@ -208,8 +214,9 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
         {
             porticoEncontrado = 1;
             printf("\n|-------------------------------------------------|");
-            printf("\n|Insira a matricula:");
-            scanf("%d", &newPassage.licensePlate);
+            printf("\n|Insira a matricula (no formato 99-XX-99): ");
+            scanf("%s", &newPassage.licensePlate);
+
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a classe do veiculo:                      |");
