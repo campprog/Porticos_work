@@ -258,7 +258,7 @@ void listpassage(passage passages[], int nrOfPassages)
     {
         printf("\033[1;37m"); 
         printf("\n|------------------------------------------------------------|");
-        printf("\n|Matricula: %d                                                |", passages[i].licensePlate);
+        printf("\n|Matricula: %s                                                |", passages[i].licensePlate);
         printf("\n|------------------------------------------------------------|");
         printf("\n|Dia: %d                                                      |", passages[i].day);
         printf("\n|------------------------------------------------------------|");
@@ -637,8 +637,30 @@ void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico po
 }
 void porticoMaiorTrafego(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
+    int porticoAtual = 0;
+    int maior ;
+    for (int i = 0; i < nrOfPorticos; i++)
+    {
+        for (int j = 0; j < nrOfPassages; j++)
+        {
+           if (porticos[i].id == passages[j].porticoId )
+           {
+             porticoAtual++;
 
+           }
+        }
+    if (porticoAtual > maior)
+             {
+               printf("Portico com maior trafego: ",porticos[i].id);
+             }
+             
+           
+           
+        }
+        
 }
+    
+
 
 void menu()
 {
@@ -786,6 +808,7 @@ void menu()
     {
 
         printf("\n\n Opcao escolhida: 16 ");
+        porticoMaiorTrafego(passages, nrOfPassages,porticos, nrOfPorticos);
         break;
     }
     case 17:
