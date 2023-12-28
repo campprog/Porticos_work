@@ -24,24 +24,27 @@ struct Portico
     char licensePlate[8];
 
 };*/
+struct Date
+{
+    int day;
+    int month;
+    int year;
+};
 struct Passage
 {
     char licensePlate[10];
     int vehicleClass;
     int porticoId;
-    struct Date
-    {
-        int day;
-        int month;
-        int year;
-    } date;
-    int hour;
+    struct Date date;
+    char hour [6];
 };
+
 // podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.- Usar o formato da matricula com o Char hhh
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
 typedef struct licencePlate plate;
+typedef struct Date Date;
 void menu();
 int nrOfPorticos = 4;
 int option;
@@ -56,7 +59,6 @@ portico porticos[500] = {
 };
 // porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
 passage passages[500];
-plate plates[500];
 void addPortico(portico p[], int *nrOfporticos)
 {
     clearConsole();
@@ -275,18 +277,16 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("|Insira a data (no formato 21/02/2002):            |\n");
-            if (scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year) != 3) {
-            printf("Formato de data inválido\n");
-             return;
-}
-            // Verifica se a data é válida
-            if (newPassage.date.day < 1 || newPassage.date.day > 31 ||
-            newPassage.date.month < 1 || newPassage.date.month > 12 ||
-            newPassage.date.year < 1900 || newPassage.date.year > 2100)
-{
-    printf("Data inválida\n");
-    return;
-}
+            scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year);
+             int maxDays = 31;
+             int maxMonths = 12;
+             if (newPassage.date.day < 1 || newPassage.date.day > maxDays ||
+                  newPassage.date.month < 1 || newPassage.date.month > maxMonths ||
+                 newPassage.date.year < 1900 || newPassage.date.year > 2100)
+            {
+              printf("Formato de data inválido\n");
+                 return;
+            }
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a hora:\n ");
@@ -317,7 +317,7 @@ void listpassage(passage passages[], int nrOfPassages)
         printf("\n|------------------------------------------------------------|");
         printf("\n|Matricula: %s                                                |", passages[i].licensePlate);
         printf("\n|------------------------------------------------------------|");
-        printf("\n|Dia: %d                                                      |", passages[i].day);
+        printf("\n|Dia: %d/%d/%d                                                 |", passages[i].date.day, passages[i].date.month, passages[i].date.year);
         printf("\n|------------------------------------------------------------|");
         printf("\n|Hora %d                                                      |", passages[i].hour);
         printf("\n|------------------------------------------------------------|");
@@ -383,16 +383,20 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     printf("\n|Escolha:");
     scanf("%d", &vehicleClass);
 
-    int dayToCheck;
+   struct Date dateToCheck;
     printf("\n|------------------------------------------------------------|");
-    printf("\n|Insira o dia desejado:");
-    scanf("%d", &dayToCheck);
+    printf("\n|Insira a data desejada (no formato 21/02/2002):             |\n");
+    scanf("%d/%d/%d", &dateToCheck.day, &dateToCheck.month, &dateToCheck.year);
 
-        for(int i = 0; i < nrOfPassages; i++)
+    for (int i = 0; i < nrOfPassages; i++)
+    {
+        // Verifique se a data é igual
+        if (passages[i].date.day == dateToCheck.day &&
+            passages[i].date.month == dateToCheck.month &&
+            passages[i].date.year == dateToCheck.year &&
+            passages[i].vehicleClass == vehicleClass)
         {
 
-            if (passages[i].day == dayToCheck && passages[i].vehicleClass)
-            {
                for(int j = 0; j < nrOfPorticos; j++)
                {
                 if(porticos[j].id == passages[i].porticoId)
@@ -643,21 +647,24 @@ void gastoVeiculoAPorticos(passage passages[], int nrOfPassages, portico portico
 }
 void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
-    int dayToCheck;
     float rendimentoTotalPortico;
     int porticoId;
+    struct Date dateToCheck;
     printf("\033[1;37m"); 
     printf("\n|------------------------------------------|");
-    printf("\n|Insira o Dia \n");
-    scanf("%d", &dayToCheck);
-    printf("\n|------------------------------------------|");
     printf("\n|Insira o Portico \n");
+    printf("\n|------------------------------------------|");
     scanf("%d", &porticoId);
+  printf("\n|Insira a data desejada (no formato 21/02/2002):             |\n");
+    scanf("%d/%d/%d", &dateToCheck.day, &dateToCheck.month, &dateToCheck.year);
 
-    for(int i = 0; i < nrOfPassages; i++)
+    for (int i = 0; i < nrOfPassages; i++)
     {
-            if (passages[i].day == dayToCheck)
-            {
+        // Verifique se a data é igual
+        if (passages[i].date.day == dateToCheck.day &&
+            passages[i].date.month == dateToCheck.month &&
+            passages[i].date.year == dateToCheck.year)  
+        {
                for(int j = 0; j < nrOfPorticos; j++)
                {
                 if(porticos[j].id == passages[i].porticoId)
@@ -683,7 +690,7 @@ void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico po
     }
     if (rendimentoTotalPortico > 0)
     {
-       printf("o rendimento Diário do Portico %d no dia %d é de %0.1f", porticoId, dayToCheck, rendimentoTotalPortico);
+       printf("o rendimento Diário do Portico %d no dia %d é de %0.1f", porticoId, dateToCheck, rendimentoTotalPortico);
     }
     else
     {
