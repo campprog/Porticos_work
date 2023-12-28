@@ -395,7 +395,7 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
 
    struct Date dateToCheck;
     printf("\n|------------------------------------------------------------|");
-    printf("\n|Insira a data desejada (no formato 21/02/2002):             |\n");
+    printf("\n|Insira a data desejada (no formato 9/9/9999):             |\n");
     scanf("%d/%d/%d", &dateToCheck.day, &dateToCheck.month, &dateToCheck.year);
 
     for (int i = 0; i < nrOfPassages; i++)
@@ -665,7 +665,7 @@ void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico po
     printf("\n|Insira o Portico \n");
     printf("\n|------------------------------------------|");
     scanf("%d", &porticoId);
-  printf("\n|Insira a data desejada (no formato 21/02/2002):             |\n");
+  printf("\n|Insira a data desejada (no formato 99/9/9999):             |\n");
     scanf("%d/%d/%d", &dateToCheck.day, &dateToCheck.month, &dateToCheck.year);
 
     for (int i = 0; i < nrOfPassages; i++)
@@ -700,7 +700,7 @@ void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico po
     }
     if (rendimentoTotalPortico > 0)
     {
-       printf("o rendimento Diário do Portico %d no dia %d é de %0.1f", porticoId, dateToCheck, rendimentoTotalPortico);
+       printf("O rendimento Diário do Portico %d no dia %d/%d/%d é de %0.1f\n", porticoId, dateToCheck.day, dateToCheck.month, dateToCheck.year, rendimentoTotalPortico);
     }
     else
     {
