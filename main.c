@@ -652,7 +652,9 @@ void porticoMaiorTrafego(passage passages[], int nrOfPassages, portico porticos[
     if (porticoAtual > maior)
              {
             maior = porticoAtual;
+             printf("\033[1;37m");
             printf("Portico com maior trafego: %d\n", porticos[i].id);
+             printf("\033[0m");
              }          
         }
         menu();      
