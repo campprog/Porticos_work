@@ -30,20 +30,25 @@ struct Date
     int month;
     int year;
 };
+struct Time
+{
+    int hour;
+    int minutes;
+};
 struct Passage
 {
     char licensePlate[10];
     int vehicleClass;
     int porticoId;
     struct Date date;
-    char hour [6];
+    struct Time time;
 };
 
 // podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.- Usar o formato da matricula com o Char hhh
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
 typedef struct Portico portico;
 typedef struct Passage passage;
-typedef struct licencePlate plate;
+typedef struct Time time;
 typedef struct Date Date;
 void menu();
 int nrOfPorticos = 4;
@@ -276,7 +281,7 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             scanf("%d", &newPassage.vehicleClass);
             clearConsole();
             printf("\n|-------------------------------------------------|");
-            printf("|Insira a data (no formato 21/02/2002):            |\n");
+            printf("\n|Insira a data (no formato 99/9/9999): ");
             scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year);
              int maxDays = 31;
              int maxMonths = 12;
@@ -285,12 +290,17 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                  newPassage.date.year < 1900 || newPassage.date.year > 2100)
             {
               printf("Formato de data inválido\n");
-                 return;
+                 
             }
             clearConsole();
             printf("\n|-------------------------------------------------|");
-            printf("\n|Insira a hora:\n ");
-            scanf("%d", &newPassage.hour);
+            printf("\n|Insira a hora (no formato 99:99):\n ");
+            scanf("%d:%d", &newPassage.time.hour, &newPassage.time.minutes);
+            if(newPassage.time.hour < 1 || newPassage.time.hour > 23 ||
+               newPassage.time.minutes < 1 || newPassage.time.minutes >59) 
+               {
+                printf("Formato de hora inválido\n");
+               }
             clearConsole();
             printf("Passagem adicionada\n\n");
             passages[*nrOfPassages] = newPassage;
@@ -319,7 +329,7 @@ void listpassage(passage passages[], int nrOfPassages)
         printf("\n|------------------------------------------------------------|");
         printf("\n|Dia: %d/%d/%d                                                 |", passages[i].date.day, passages[i].date.month, passages[i].date.year);
         printf("\n|------------------------------------------------------------|");
-        printf("\n|Hora %d                                                      |", passages[i].hour);
+        printf("\n|Hora: %d:%d                                                     |", passages[i].time.hour, passages[i].time.minutes);
         printf("\n|------------------------------------------------------------|");
         if (passages[i].vehicleClass == 1)
         {
