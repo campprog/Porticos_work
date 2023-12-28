@@ -29,14 +29,13 @@ struct Passage
     char licensePlate[10];
     int vehicleClass;
     int porticoId;
-    int day;
+    struct Date
+    {
+        int day;
+        int month;
+        int year;
+    } date;
     int hour;
-};
-
-struct licencePlate
-{
-    char letters[3];
-    int numbers;
 };
 // podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.- Usar o formato da matricula com o Char hhh
 // Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
@@ -275,8 +274,19 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             scanf("%d", &newPassage.vehicleClass);
             clearConsole();
             printf("\n|-------------------------------------------------|");
-            printf("\n|Insira a data:\n ");
-            scanf("%d", &newPassage.day);
+            printf("|Insira a data (no formato 21/02/2002):            |\n");
+            if (scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year) != 3) {
+            printf("Formato de data inválido\n");
+             return;
+}
+            // Verifica se a data é válida
+            if (newPassage.date.day < 1 || newPassage.date.day > 31 ||
+            newPassage.date.month < 1 || newPassage.date.month > 12 ||
+            newPassage.date.year < 1900 || newPassage.date.year > 2100)
+{
+    printf("Data inválida\n");
+    return;
+}
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a hora:\n ");
