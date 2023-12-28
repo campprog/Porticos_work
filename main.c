@@ -252,7 +252,18 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a matricula (no formato 99-XX-99): ");
             scanf("%s", &newPassage.licensePlate);
-
+            if (strlen(newPassage.licensePlate) != 8 ||
+                !isdigit(newPassage.licensePlate[0]) || 
+                !isdigit(newPassage.licensePlate[1]) || 
+                !(isalpha(newPassage.licensePlate[3]) && isupper(newPassage.licensePlate[3])) || 
+                !(isalpha(newPassage.licensePlate[4]) && isupper(newPassage.licensePlate[4])) ||
+                !isdigit(newPassage.licensePlate[6]) || 
+                !isdigit(newPassage.licensePlate[7]) || 
+                newPassage.licensePlate[2] != '-'    || 
+                newPassage.licensePlate[5] != '-') {
+                printf("Formato de matrícula inválido\n");
+                menu();
+            }
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a classe do veiculo:                      |");
@@ -336,7 +347,7 @@ void listPassageNumPortico(passage passages[], int nrOfPassages, portico portico
         
         if (porticoid == passages[i].porticoId)
         {
-            printf(" Passou o veiculo com a matricula %d\n",passages[i].licensePlate);
+            printf(" Passou o veiculo com a matricula %s\n",passages[i].licensePlate);
         }
         else
         {
