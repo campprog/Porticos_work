@@ -637,8 +637,8 @@ void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico po
 }
 void porticoMaiorTrafego(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
-    int porticoAtual = 0;
-    int maior ;
+    int porticoAtual;
+    int maior = 0;
     for (int i = 0; i < nrOfPorticos; i++)
     {
         for (int j = 0; j < nrOfPassages; j++)
@@ -651,13 +651,11 @@ void porticoMaiorTrafego(passage passages[], int nrOfPassages, portico porticos[
         }
     if (porticoAtual > maior)
              {
-               printf("Portico com maior trafego: ",porticos[i].id);
-             }
-             
-           
-           
+            maior = porticoAtual;
+            printf("Portico com maior trafego: %d\n", porticos[i].id);
+             }          
         }
-        
+        menu();      
 }
     
 
