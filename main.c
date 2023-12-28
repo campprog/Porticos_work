@@ -13,17 +13,9 @@ struct Portico
     float motorcyclePrice;
     float lightVehiclePrice;
     float heavyVehiclePrice;
-    // int nrMotorcyclepasses;
-    // int nrLightVehiclepasses;
-    // int nrHeavyVehicle;
+  
 };
-/*struct Veiculo
-{
-    int id;
-    int class;
-    char licensePlate[8];
 
-};*/
 struct Date
 {
     int day;
@@ -44,8 +36,7 @@ struct Passage
     struct Time time;
 };
 
-// podemos meter int id em vez de ter que usar o formato de matricula- Usar o formato da matricula com Char.- Usar o formato da matricula com o Char hhh
-// Como se mete as horas, apenas necessario meter a hora ou tambem os minutos e as datas como se metem tambem?
+
 typedef struct Portico portico;
 typedef struct Passage passage;
 typedef struct Time time;
@@ -62,7 +53,7 @@ portico porticos[500] = {
     {4, 3, 2, 1}
 
 };
-// porque tenho que meter valor 500 dentro do [], se nao meter entra em loop infinito
+
 passage passages[500];
 void addPortico(portico p[], int *nrOfporticos)
 {
@@ -79,7 +70,7 @@ void addPortico(portico p[], int *nrOfporticos)
         if (newPortico.id == p[i].id)
         {
             printf("ja existe esse Pórtico");
-            return;
+            return menu();
         }
     }
     printf("\033[1;37m");
@@ -733,7 +724,9 @@ void porticoMaiorTrafego(passage passages[], int nrOfPassages, portico porticos[
         }
         menu();      
 }
-    
+void sair(){
+    return ;
+}
 
 
 void menu()
@@ -775,6 +768,8 @@ void menu()
     printf("\n| 17 -Pórtico com maior tráfego                                 --|");
     printf("\n|-----------------------------------------------------------------|");
     printf("\n| 18 -Rendimento diário por Pórtico                             --|");
+    printf("\n|=================================================================|");
+    printf("\n| 19 -Sair                                                      --|");
     printf("\n|=================================================================|");
     printf("\n|Escolha uma opcao:");
     printf("\033[0m");
@@ -897,6 +892,12 @@ void menu()
     {
         rendimentoDiarioPorPortico(passages, nrOfPassages,  porticos, nrOfPorticos);
         printf("\n\n Opcao escolhida: 16 ");
+        break;
+    }
+     case 19:
+    {
+        sair();
+        printf("\n\n Opcao escolhida: 19 ");
         break;
     }
     default:
