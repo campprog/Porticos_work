@@ -270,6 +270,13 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("\n|Veiculos Pesados: 3                              |");
             printf("\n|-------------------------------------------------|\n");
             scanf("%d", &newPassage.vehicleClass);
+            for (int j = 0; j < *nrOfPassages; j++) {
+                if (strcmp(passages[j].licensePlate, newPassage.licensePlate) == 0 &&
+                    passages[j].vehicleClass != newPassage.vehicleClass) {
+                    printf("Esta matricula já está associada a outro veiculo\n");
+                    menu();
+                }
+            }
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a data (no formato 99/9/9999): ");
