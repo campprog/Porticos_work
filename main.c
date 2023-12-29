@@ -457,9 +457,9 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     menu();
 }
 void averagePassagesPerPortico(passage passages[],int nrOfPorticos){
-    int media = 0;
+    float media = 0;
     
-    int PassagensTotais = 0;
+   float PassagensTotais = 0;
 
 
      for (int i = 0; i < nrOfPassages; i++) {
@@ -575,48 +575,41 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
 void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos) {
     int totalPassagensVeiculo = 0;
     int porticoId;
-    int licensePlate;
+    char licensePlate[20];  // Assumindo que a matrícula do veículo pode ter até 19 caracteres
     int verificarPortico = 0;
+
     printf("\033[1;37m"); 
     printf("\n|--------------------------------------------------|");
     printf("\n|Insira o Pórtico:\n");
     scanf("%d", &porticoId);
-    for (int j = 0; j < nrOfPorticos; j++)
-    {
-       if(porticos[j].id == porticoId)
-       {
-        verificarPortico++;
-        break;
-       }
-       if(!verificarPortico){
-        printf("Portico nao existe");
-        return menu();
-       }
-    }
-    
-    printf("\n|--------------------------------------------------|");
-    printf("\n|Insira a matricula do veiculo:\n");
-    scanf("%s", &licensePlate);
 
- 
-    
+    for (int j = 0; j < nrOfPorticos; j++) {
+        if (porticos[j].id == porticoId) {
+            verificarPortico = 1;
+            break;
+        }
+    }
+    if (!verificarPortico) {
+        printf("Portico nao existe\n");
+        menu();  // Se a função menu() não retorna nada, ajuste conforme necessário
+        return;
+    }
+
+    printf("Insira a matrícula do veículo:\n");
+    scanf("%s", licensePlate); 
+
     for (int i = 0; i < nrOfPassages; i++) {
-        if (passages[i].porticoId == porticoId && passages[i].licensePlate == licensePlate) {
+        if (passages[i].porticoId == porticoId && strcmp(passages[i].licensePlate, licensePlate) == 0) {
             totalPassagensVeiculo++;
-            
         } 
     }
-            
-    if (totalPassagensVeiculo > 0 )
-    {
-        printf("Total de passagens do veículo %s no portico %d: %d\n", &licensePlate, porticoId, totalPassagensVeiculo);
+    if (totalPassagensVeiculo > 0) {
+        printf("Total de passagens do veículo %s no portico %d: %d\n", licensePlate, porticoId, totalPassagensVeiculo);
+    } else {
+        printf("Este veiculo de matricula %s não efetuou nenhuma passagem\n", licensePlate);
     }
-    else
-    {
-        printf("Este veiculo de matricula %s não efetuou nenhuma passagem", &licensePlate);
-    }
-    printf("\033[0m"); 
-    menu();
+    printf("\033[0m");
+    menu(); 
 }
 void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
@@ -639,6 +632,7 @@ void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], i
                     valorRendimentoTotal += porticos[j].heavyVehiclePrice;
                     break;
                 default:
+                    printf("\033[1;37m");
                     printf("Classe de veículo inválida\n");
                 }
                 break;
@@ -646,19 +640,32 @@ void RendimentoTotal(passage passages[], int nrOfPassages, portico porticos[], i
         }
     }
     printf("O valor do Rendimento total é de %0.1f Euros\n", valorRendimentoTotal);
+    printf("\033[0m");
     menu();
 }
 void gastoVeiculoAPorticos(passage passages[], int nrOfPassages, portico porticos[], int nrOfPorticos)
 {
-    int licensePlate;
-    int gastosVeiculo;
+    char licensePlate[10];
+    int gastosVeiculo = 0 ;
     printf("\033[1;37m"); 
     printf("\n|--------------------------------------------------|");
     printf("\n|Insira a matricula do veiculo:\n");
     scanf("%s", &licensePlate);
+     if (strlen(licensePlate) != 8 ||
+                !isdigit(licensePlate[0]) || 
+                !isdigit(licensePlate[1]) || 
+                !(isalpha(licensePlate[3]) && isupper(licensePlate[3])) || 
+                !(isalpha(licensePlate[4]) && isupper(licensePlate[4])) ||
+                !isdigit(licensePlate[6]) || 
+                !isdigit(licensePlate[7]) || 
+                licensePlate[2] != '-'    || 
+                licensePlate[5] != '-') {
+                printf("Formato de matrícula inválido\n");
+                menu();
+            }
     for (int i = 0; i < nrOfPassages; i++) {
         for(int j = 0; j < nrOfPorticos; j++){
-        if (passages[i].porticoId == porticos[j].id && passages[i].licensePlate == licensePlate)
+        if (strcmp(passages[i].licensePlate, licensePlate)==0)
         {
              switch (passages[i].vehicleClass)
                 {
@@ -680,7 +687,7 @@ void gastoVeiculoAPorticos(passage passages[], int nrOfPassages, portico portico
     }
     if (gastosVeiculo > 0)
     {
-        printf("O veiculo com matricula %d teve um gasto total de %d Euros", licensePlate, gastosVeiculo);
+        printf("O veiculo com matricula %s teve um gasto total de %d Euros", licensePlate, gastosVeiculo);
     }
     else
     {
