@@ -241,6 +241,9 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
     int porticoEncontrado = 0;
     passage newPassage;
     int verificarClass = 0;
+    int escolha;
+    int escolha2;
+    int escolha3;
     printf("\033[1;37m"); 
     printf("\n|---------------------------------------------------|");
     printf("\n|Insira o portico de passagem:                      |\n");
@@ -254,7 +257,7 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a matricula (no formato 99-XX-99): ");
             scanf("%s", &newPassage.licensePlate);
-            if (strlen(newPassage.licensePlate) != 8 ||
+            while (strlen(newPassage.licensePlate) != 8 ||
                 !isdigit(newPassage.licensePlate[0]) || 
                 !isdigit(newPassage.licensePlate[1]) || 
                 !(isalpha(newPassage.licensePlate[3]) && isupper(newPassage.licensePlate[3])) || 
@@ -262,9 +265,23 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                 !isdigit(newPassage.licensePlate[6]) || 
                 !isdigit(newPassage.licensePlate[7]) || 
                 newPassage.licensePlate[2] != '-'    || 
-                newPassage.licensePlate[5] != '-') {
+                newPassage.licensePlate[5] != '-')
+            {
                 printf("Formato de matrícula inválido\n");
+                printf("Deseja voltar voltar ao menu ou voltar a meter a matricula de novo?\n");
+                printf("1- Meter matricula\n");
+                printf("2- Voltar ao menu\n");
+                scanf("%d", &escolha);
+                switch (escolha)
+                {
+                case 1:
+                printf("Insira a matricula de novo\n");
+                scanf("%s", &newPassage.licensePlate);
+                    break;
+                case 2:
                 return menu();
+                break;
+                }
             }
             clearConsole();
             printf("\n|-------------------------------------------------|");
@@ -288,29 +305,57 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                    return menu();
                 }
             }
+            int maxDays = 31;
+            int maxMonths = 12;
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a data (no formato 99/9/9999): ");
             scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year);
-             int maxDays = 31;
-             int maxMonths = 12;
-             if (newPassage.date.day < 1 || newPassage.date.day > maxDays ||
+            while (newPassage.date.day < 1 || newPassage.date.day > maxDays ||
                   newPassage.date.month < 1 || newPassage.date.month > maxMonths ||
                  newPassage.date.year < 1900 || newPassage.date.year > 2100)
             {
-              printf("Formato de data inválido\n");
-              return menu();
-            }
+                printf("Formato de data inválido\n");
+                printf("Deseja voltar ao menu ou voltar a inserir a data de novo?\n");
+                printf("1- Inserir data\n");
+                printf("2- Voltar ao menu\n");
+                scanf("%d", &escolha2);
+                switch (escolha2)
+                {
+                case 1:
+                printf("Insira a data de novo no formato 99/9/9999\n");
+                scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year);
+                    break;
+                case 2:
+                return menu();
+                break;
+                }
+            }   
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a hora (no formato 99:99):\n ");
             scanf("%d:%d", &newPassage.time.hour, &newPassage.time.minutes);
-            if(newPassage.time.hour < 1 || newPassage.time.hour > 23 ||
-               newPassage.time.minutes < 1 || newPassage.time.minutes >59) 
-               {
+
+            while (newPassage.time.hour < 1 || newPassage.time.hour > 23 ||
+               newPassage.time.minutes < 1 || newPassage.time.minutes >59)
+            {
                 printf("Formato de hora inválido\n");
+                printf("Deseja voltar ao menu ou voltar a inserir a hora de novo?\n");
+                printf("1- Inserir hora\n");
+                printf("2- Voltar ao menu\n");
+                scanf("%d", &escolha3);
+                switch (escolha3)
+                {
+                case 1:
+                printf("Insira a hora de novo no formato 99:99\n");
+                scanf("%d:%d", &newPassage.time.hour, &newPassage.time.minutes);
+                    break;
+                case 2:
                 return menu();
-               }
+                break;
+                }
+            }
+            
             clearConsole();
             printf("Passagem adicionada\n\n");
             passages[*nrOfPassages] = newPassage;
@@ -393,6 +438,8 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
       clearConsole();
     int vehicleClass;
     int totalRendimento = 0;
+    int escolha;
+    passage newPassage;
     printf("\033[1;37m"); 
     printf("\n|------------------------------------------------------------|");
     printf("\n|Escolha a classe que  deseja ver o rendimento:              |");
@@ -409,37 +456,60 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
                return menu();
             }
    struct Date dateToCheck;
+    int maxDays = 31;
+    int maxMonths = 12;
     printf("\n|------------------------------------------------------------|");
-    printf("\n|Insira a data desejada (no formato 9/9/9999):             |\n");
-    scanf("%d/%d/%d", &dateToCheck.day, &dateToCheck.month, &dateToCheck.year);
-
-    for (int i = 0; i < nrOfPassages; i++)
-    {
-        // Verifique se a data é igual
-        if (passages[i].date.day == dateToCheck.day &&
-            passages[i].date.month == dateToCheck.month &&
-            passages[i].date.year == dateToCheck.year &&
-            passages[i].vehicleClass == vehicleClass)
-        {
-
-               for(int j = 0; j < nrOfPorticos; j++)
-               {
-                if(porticos[j].id == passages[i].porticoId)
+      printf("\n|Insira a data (no formato 99/9/9999): ");
+            scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year);
+            while (newPassage.date.day < 1 || newPassage.date.day > maxDays ||
+                  newPassage.date.month < 1 || newPassage.date.month > maxMonths ||
+                 newPassage.date.year < 1900 || newPassage.date.year > 2100)
+            {
+                printf("Formato de data inválido\n");
+                printf("Deseja voltar ao menu ou voltar a inserir a data de novo?\n");
+                printf("1- Inserir data\n");
+                printf("2- Voltar ao menu\n");
+                scanf("%d", &escolha);
+                switch (escolha)
                 {
-                    switch (vehicleClass)
+                case 1:
+                printf("Insira a data de novo no formato 99/9/9999\n");
+                scanf("%d/%d/%d", &newPassage.date.day, &newPassage.date.month, &newPassage.date.year);
+                    break;
+                case 2:
+                return menu();
+                break;
+                }
+            }
+            if (nrOfPassages > 0)
+            {
+                for (int i = 0; i < nrOfPassages; i++)
+                {
+                // Verifique se a data é igual
+                    if (passages[i].date.day == dateToCheck.day &&
+                        passages[i].date.month == dateToCheck.month &&
+                        passages[i].date.year == dateToCheck.year &&
+                        passages[i].vehicleClass == vehicleClass)
                     {
-                    case 1:
-                        totalRendimento += porticos[j].motorcyclePrice;
-                        break;
-                    case 2:
-                        totalRendimento += porticos[j].motorcyclePrice;
-                        break;
-                    case 3:
-                        totalRendimento += porticos[j].motorcyclePrice;
-                        break;
-                    default:
-                        printf("Classe de veículo inválida\n");
-                        break;
+
+                      for(int j = 0; j < nrOfPorticos; j++)
+                      {
+                         if(porticos[j].id == passages[i].porticoId)
+                           {
+                             switch (vehicleClass)
+                             {
+                             case 1:
+                             totalRendimento += porticos[j].motorcyclePrice;
+                             break;
+                             case 2:
+                             totalRendimento += porticos[j].motorcyclePrice;
+                             break;
+                             case 3:
+                             totalRendimento += porticos[j].motorcyclePrice;
+                             break;
+                             default:
+                            printf("Classe de veículo inválida\n");
+                            break;
                     }
                 }
                }
@@ -456,7 +526,13 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     printf("\033[0m"); 
 
     return menu();
-}
+   }
+   else
+   {
+    printf("Para a classe escolhida no dia selecionado não existe qualquer rendimento");
+    return menu();
+   }
+}     
 void averagePassagesPerPortico(passage passages[],int nrOfPorticos){
     float media = 0;
     
