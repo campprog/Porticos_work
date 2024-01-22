@@ -63,9 +63,18 @@ void addPortico(portico p[], int *nrOfporticos)
     printf("\033[1;37m");
     printf("\n|------------------------------------------------------|");
     printf("\n|Insira o numero do portico:");
-
-    scanf("%d", &newPortico.id);
-
+        while (1) {
+        if (scanf("%d", &newPortico.id) == 1) {
+            // A entrada é um número, sair do loop
+            break;
+        } else {
+            // Limpar o buffer de entrada (stdin)
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n'); // Limpar o buffer de entrada
+            // Pode ser útil adicionar um prompt para o usuário tentar novamente
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int i = 0; i < *nrOfporticos; i++)
     {
         if (newPortico.id == p[i].id)
@@ -75,18 +84,40 @@ void addPortico(portico p[], int *nrOfporticos)
             return menu();
         }
     }
-
     printf("\n|------------------------------------------------------|");
     printf("\n| Insira o preço da passagem do Motociclo:");
-    scanf("%f", &newPortico.motorcyclePrice);
+     while (1) {
+        if (scanf("%f", &newPortico.motorcyclePrice) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     printf("\n|------------------------------------------------------|");
     printf("\n|Insira o preço da passagem do Veiculo Ligeiro:");
-    scanf("%f", &newPortico.lightVehiclePrice);
+     while (1) {
+        if (scanf("%f", &newPortico.lightVehiclePrice) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     printf("\n|------------------------------------------------------|");
     printf("\n|Insira o preço da passagem do Veiculo Pesado:");
     printf("\033[0m");
-    scanf("%f", &newPortico.heavyVehiclePrice);
-
+ while (1) {
+        if (scanf("%f", &newPortico.heavyVehiclePrice) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     p[*nrOfporticos] = newPortico;
     (*nrOfporticos)++;
     // void menu;
@@ -100,8 +131,18 @@ void removePortico(portico p[], int *nrOfporticos)
     printf("\033[1;37m");
     printf("\n|------------------------------------------------------------|");
     printf("\n|Insira o número do portico que deseja remover:              |\n");
-    scanf("%d", &RemovePortico);
-
+  while (1) {
+        if (scanf("%d", &RemovePortico) == 1) {
+            // A entrada é um número, sair do loop
+            break;
+        } else {
+            // Limpar o buffer de entrada (stdin)
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n'); // Limpar o buffer de entrada
+            // Pode ser útil adicionar um prompt para o usuário tentar novamente
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int i = 0; i < *nrOfporticos; i++)
     {
         if (RemovePortico == p[i].id)
@@ -154,8 +195,15 @@ void editPrices(portico p[], int nrOfporticos)
     printf("\033[1;37m");
     printf("\n|------------------------------------------------------------|");
     printf("\n|Insira o número do portico que deseja editar:               |\n");
-    scanf("%d", &EditPortico);
-
+ while (1) {
+        if (scanf("%d", &EditPortico) == 1) {
+            break;
+        } else {
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n'); 
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int i = 0; i < nrOfporticos; i++)
     {
         if (EditPortico == p[i].id)
@@ -164,13 +212,37 @@ void editPrices(portico p[], int nrOfporticos)
             printf("\033[1;37m");
             printf("\n|------------------------------------------------------------|");
             printf("\n|Insira o novo preço do motociclo:                           |\n");
-            scanf("%f", &p[i].motorcyclePrice);
+            while (1) {
+        if (scanf("%f", &p[i].motorcyclePrice) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
             printf("\n|------------------------------------------------------------|");
             printf("\n|Insira o novo preço do veiculo ligeiro:                     |\n");
-            scanf("%f", &p[i].lightVehiclePrice);
+             while (1) {
+        if (scanf("%f", &p[i].lightVehiclePrice) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
             printf("\n|------------------------------------------------------------|");
             printf("\n|Insira o novo preço do veiculo pesado:                      |\n ");
-            scanf("%f", &p[i].heavyVehiclePrice);
+            while (1) {
+        if (scanf("%f", &p[i].heavyVehiclePrice) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
             printf("Preços do Portico Atualizado!");
             printf("\033[0m");
         }
@@ -191,8 +263,15 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
     printf("\033[1;37m");
     printf("\n|------------------------------------|");
     printf("\n|Escolha o Portico:                  |\n");
-    scanf("%d", &porticoid);
-
+     while (1) {
+        if (scanf("%d", &porticoid) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int i = 0; i < nrOfporticos; i++)
     {
         if (porticoid == porticos[i].id)
@@ -205,8 +284,15 @@ void priceCheckForEachClass(portico porticos[], int nrOfporticos)
             printf("\n|veiculos ligeiros: 2                                |");
             printf("\n|veiculos Pesados: 3                                 |");
             printf("\n|----------------------------------------------------|\n");
-            scanf("%d", &porticoClass);
-
+             while (1) {
+        if (scanf("%d", &porticoClass) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
             if (porticoClass == 1)
             {
                 printf("Preco do Motociclo: %f", porticos[i].motorcyclePrice);
@@ -245,7 +331,20 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
     printf("\033[1;37m");
     printf("\n|---------------------------------------------------|");
     printf("\n|Insira o portico de passagem:                      |\n");
-    scanf("%d", &newPassage.porticoId);
+    while (1) {
+        if (scanf("%d", &newPassage.porticoId) == 1) {
+            // A entrada é um número, sair do loop
+            break;
+        } else {
+            // Limpar o buffer de entrada (stdin)
+            printf("Entrada inválida. Insira um número.\n");
+
+            while (getchar() != '\n'); // Limpar o buffer de entrada
+
+            // Pode ser útil adicionar um prompt para o usuário tentar novamente
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     clearConsole();
     for (int i = 0; i < nrOfporticos; i++)
     {
@@ -254,7 +353,7 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             porticoEncontrado = 1;
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a matricula (no formato 99-XX-99): ");
-            scanf("%s", &newPassage.licensePlate);
+             scanf("%s", &newPassage.licensePlate);
             while (strlen(newPassage.licensePlate) != 8 ||
                    !isdigit(newPassage.licensePlate[0]) ||
                    !isdigit(newPassage.licensePlate[1]) ||
@@ -270,6 +369,15 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                 printf("1- Meter matricula\n");
                 printf("2- Voltar ao menu\n");
                 scanf("%d", &escolha);
+                 while (1) {
+        if (scanf("%d", &escolha) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
                 switch (escolha)
                 {
                 case 1:
@@ -289,7 +397,15 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("\n|Veiculos ligeiros: 2                             |");
             printf("\n|Veiculos Pesados: 3                              |");
             printf("\n|-------------------------------------------------|\n");
-            scanf("%d", &newPassage.vehicleClass);
+             while (1) {
+        if (scanf("%d", &newPassage.vehicleClass) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
             if (newPassage.vehicleClass < 1 || newPassage.vehicleClass > 3)
             {
                 printf("Opção invalida");
@@ -319,7 +435,15 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                 printf("Deseja voltar ao menu ou voltar a inserir a data de novo?\n");
                 printf("1- Inserir data\n");
                 printf("2- Voltar ao menu\n");
-                scanf("%d", &escolha2);
+                  while (1) {
+        if (scanf("%d", &escolha2) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
                 switch (escolha2)
                 {
                 case 1:
@@ -335,7 +459,6 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a hora (no formato 99:99):\n ");
             scanf("%d:%d", &newPassage.time.hour, &newPassage.time.minutes);
-
             while (newPassage.time.hour < 1 || newPassage.time.hour > 23 ||
                    newPassage.time.minutes < 1 || newPassage.time.minutes > 59)
             {
@@ -343,7 +466,15 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                 printf("Deseja voltar ao menu ou voltar a inserir a hora de novo?\n");
                 printf("1- Inserir hora\n");
                 printf("2- Voltar ao menu\n");
-                scanf("%d", &escolha3);
+                  while (1) {
+        if (scanf("%d", &escolha3) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
                 switch (escolha3)
                 {
                 case 1:
@@ -414,7 +545,15 @@ void listPassageNumPortico(passage passages[], int nrOfPassages, portico portico
     int porticoid;
     printf("\033[1;37m");
     printf("\nEscolha o Portico: ");
-    scanf("%d", &porticoid);
+      while (1) {
+        if (scanf("%d", &porticoid) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
 
     for (int i = 0; i < nrOfPassages; i++)
     {
@@ -449,14 +588,20 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     printf("\n|3 - Veículo pesado                                          |");
     printf("\n|------------------------------------------------------------|");
     printf("\n|Escolha:");
-    scanf("%d", &vehicleClass);
-    
+      while (1) {
+        if (scanf("%d",  &vehicleClass) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira a classe novamente: ");
+        }
+    }
     if (vehicleClass < 1 || vehicleClass > 3)
     {
         printf("Opção inválida\n");
         return menu();
     }
-    
     struct Date dateToCheck;
     int maxDays = 31;
     int maxMonths = 12;
@@ -464,7 +609,6 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
     printf("\n|------------------------------------------------------------|");
     printf("\n|Insira a data (no formato 99/9/9999): ");
     scanf("%d/%d/%d", &dateToCheck.day, &dateToCheck.month, &dateToCheck.year);
-    
     while (dateToCheck.day < 1 || dateToCheck.day > maxDays ||
            dateToCheck.month < 1 || dateToCheck.month > maxMonths ||
            dateToCheck.year < 1900 || dateToCheck.year > 2100)
@@ -473,8 +617,14 @@ void RendimentoPorClasse(passage passages[], int nrOfPassages, portico porticos[
         printf("Deseja voltar ao menu ou voltar a inserir a data de novo?\n");
         printf("1- Inserir data\n");
         printf("2- Voltar ao menu\n");
-        scanf("%d", &escolha);
-        
+         while (1) {
+        if (scanf("%d",  &escolha) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+        }
+    }   
         switch (escolha)
         {
             case 1:
@@ -573,8 +723,15 @@ void totalTraficoPorPortico(passage passages[], int nrOfPassages, portico portic
     int totalTrafico = 0;
     printf("\033[1;37m");
     printf("\nEscolha o Portico: ");
-    scanf("%d", &porticoId);
-
+    while (1) {
+        if (scanf("%d", &porticoId) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int i = 0; i < nrOfPassages; i++)
     {
         if (porticoId == passages[i].porticoId)
@@ -630,8 +787,15 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
         printf("\n|2 - Veículo Ligeiro                                   |");
         printf("\n|3 - Veículo Pesado                                    |");
         printf("\n|------------------------------------------------------|\n");
-        scanf("%d", &vehicleClass);
-
+        while (1) {
+        if (scanf("%d", &vehicleClass) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
         int totalTrafegoDiario = 0;
 
         for (int i = 0; i < nrOfPassages; i++)
@@ -641,7 +805,6 @@ void trafegoDiarioPorClasse(passage passages[], int nrOfPassages, portico portic
                 totalTrafegoDiario++;
             }
         }
-
         switch (vehicleClass)
         {
         case 1:
@@ -673,8 +836,15 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
     printf("\033[1;37m");
     printf("\n|--------------------------------------------------|");
     printf("\n|Insira o Pórtico:\n");
-    scanf("%d", &porticoId);
-
+     while (1) {
+        if (scanf("%d", &porticoId) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int j = 0; j < nrOfPorticos; j++)
     {
         if (porticos[j].id == porticoId)
@@ -689,7 +859,6 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
         return menu(); // Se a função menu() não retorna nada, ajuste conforme necessário
         return;
     }
-
    printf("\n|Insira a matricula (no formato 99-XX-99): ");
             scanf("%s", &newPassage.licensePlate);
             while (strlen(newPassage.licensePlate) != 8 ||
@@ -707,6 +876,15 @@ void PassagensVeiculoPorPortico(passage passages[], int nrOfPassages, portico po
                 printf("1- Meter matricula\n");
                 printf("2- Voltar ao menu\n");
                 scanf("%d", &escolha);
+                 while (1) {
+        if (scanf("%d", &escolha) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
                 switch (escolha)
                 {
                 case 1:
@@ -794,7 +972,15 @@ void gastoVeiculoAPorticos(passage passages[], int nrOfPassages, portico portico
                 printf("Deseja voltar voltar ao menu ou voltar a meter a matricula de novo?\n");
                 printf("1- Meter matricula\n");
                 printf("2- Voltar ao menu\n");
-                scanf("%d", &escolha);
+                 while (1) {
+        if (scanf("%d", &escolha) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
                 switch (escolha)
                 {
                 case 1:
@@ -856,6 +1042,15 @@ void rendimentoDiarioPorPortico(passage passages[], int nrOfPassages, portico po
     printf("\n|------------------------------------------|");
     printf("\n|Insira o Portico \n");
     scanf("%d", &porticoId);
+     while (1) {
+        if (scanf("%d", &porticoId) == 1) {   
+            break;
+        } else {  
+            printf("Entrada inválida. Insira um número.\n");
+            while (getchar() != '\n');  
+            printf("Insira o portico de passagem novamente: ");
+        }
+    }
     for (int j = 0; j < nrOfPorticos; j++)
     {
         if (porticoId == porticos[j].id)
