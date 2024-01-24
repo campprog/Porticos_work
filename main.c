@@ -354,6 +354,7 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a matricula (no formato 99-XX-99): ");
              scanf("%s", &newPassage.licensePlate);
+             int invalidFormatFlag = 0;
             while (strlen(newPassage.licensePlate) != 8 ||
                    !isdigit(newPassage.licensePlate[0]) ||
                    !isdigit(newPassage.licensePlate[1]) ||
@@ -364,10 +365,13 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                    newPassage.licensePlate[2] != '-' ||
                    newPassage.licensePlate[5] != '-')
             {
-                printf("Formato de matrícula inválido\n");
-                printf("Deseja voltar voltar ao menu ou voltar a meter a matricula de novo?\n");
-                printf("1- Meter matricula\n");
-                printf("2- Voltar ao menu\n");
+                if (!invalidFormatFlag) {
+                    printf("Formato de matrícula inválido\n");
+                    printf("Deseja voltar ao menu ou voltar a meter a matricula de novo?\n");
+                    printf("1- Meter matricula\n");
+                    printf("2- Voltar ao menu\n");
+                    invalidFormatFlag = 1;
+                }
                  while (1) {
         if (scanf("%d", &escolha) == 1) {   
             break;
@@ -389,8 +393,8 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                 printf("Escolha umas das duas opções");
                 break;
                 }
-               
             }
+            invalidFormatFlag = 0;
             clearConsole();
             printf("\n|-------------------------------------------------|");
             printf("\n|Insira a classe do veiculo:                      |");
@@ -544,7 +548,8 @@ void listPassageNumPortico(passage passages[], int nrOfPassages, portico portico
     clearConsole();
     int porticoid;
     printf("\033[1;37m");
-    printf("\nEscolha o Portico: ");
+    printf("\n|---------------------------------------------------|");
+    printf("\n|Insira o portico de passagem:                      |\n");
       while (1) {
         if (scanf("%d", &porticoid) == 1) {   
             break;
