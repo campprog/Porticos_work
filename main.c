@@ -374,7 +374,6 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
         } else {  
             printf("Entrada inválida. Insira um número.\n");
             while (getchar() != '\n');  
-            printf("Insira o portico de passagem novamente: ");
         }
     }
                 switch (escolha)
@@ -386,7 +385,11 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
                 case 2:
                     return menu();
                     break;
+                default:
+                printf("Escolha umas das duas opções");
+                break;
                 }
+               
             }
             clearConsole();
             printf("\n|-------------------------------------------------|");
@@ -440,7 +443,6 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
         } else {  
             printf("Entrada inválida. Insira um número.\n");
             while (getchar() != '\n');  
-            printf("Insira o portico de passagem novamente: ");
         }
     }
                 switch (escolha2)
@@ -471,7 +473,6 @@ void insertPassage(passage passages[], int *nrOfPassages, int nrOfporticos, port
         } else {  
             printf("Entrada inválida. Insira um número.\n");
             while (getchar() != '\n');  
-            printf("Insira o portico de passagem novamente: ");
         }
     }
                 switch (escolha3)
